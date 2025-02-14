@@ -1,13 +1,21 @@
 <resources>
     <string name="app_name">MealPlanner</string>
     <string name="sign_in">Sign In</string>
+    <string name="underline_sign_in"><u>&#32;Sign In</u></string>
     <string name="hi_welcome_back_you_ve_been_missed">Hi! Welcome back, you’ve been missed</string>
-    <string name="example_gmail">example@gmail.com</string>
     <string name="email">Email</string>
     <string name="required">*Required</string>
     <string name="password">Password</string>
     <string name="forget_password"><u>Forget Password?</u></string>
     <string name="or_sign_in_with">&#32;Or sign in with&#32;</string>
     <string name="dont_have_an_account">Don’t have an account? </string>
-    <string name="sign_up"><u>&#32;Sign Up</u></string>
+    <string name="underline_sign_up"><u>&#32;Sign Up</u></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_account">Create Account</string>
+    <string name="fill_our_information_below_or_register_with_your_social_account">Fill our information below or register with your\nsocial account</string>
+    <string name="name">Name</string>
+    <string name="agree_with">Agree with</string>
+    <string name="terms_amp_conditions"><u><![CDATA[Terms & Conditions]]></u></string>
+    <string name="_32_or_sign_up_with_32">" Or sign up with "</string>
+    <string name="already_have_an_account">Already have an account?</string>
 </resources>
