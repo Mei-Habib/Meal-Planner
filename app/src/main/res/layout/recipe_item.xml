@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="19dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="222dp"
+        android:layout_height="225dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="129dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/roasted_chicken" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/work_sans_semi_bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="Roasted Chicken" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/hour_ic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="61.5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/green"
+            android:textSize="12sp"
+            tools:text="35 mins" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="28dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/bookmark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="16.5dp"
+            android:fontFamily="@font/poppins_regular"
+            tools:text="Dinner"
+            android:textColor="@color/green"
+            android:textSize="12sp" />
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

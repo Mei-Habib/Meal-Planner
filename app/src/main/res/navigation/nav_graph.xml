@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/recipesFragment">
+
+    <fragment
+        android:id="@+id/recipesFragment"
+        android:name="com.example.mealplanner.fragments.RecipesFragment"
+        android:label="RecipesFragment" />
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.example.mealplanner.fragments.ExploreFragment"
+        android:label="ExploreFragment" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.mealplanner.fragments.FavoriteFragment"
+        android:label="FavoriteFragment" />
+    <fragment
+        android:id="@+id/plannerFragment"
+        android:name="com.example.mealplanner.fragments.PlannerFragment"
+        android:label="PlannerFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.mealplanner.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
+</navigation>

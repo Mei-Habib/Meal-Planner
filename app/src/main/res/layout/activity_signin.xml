@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="17dp"
+    android:layout_marginTop="20dp"
     tools:context=".activities.SigninActivity">
 
 
@@ -35,12 +36,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/outlinedTextField_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="200dp"
         app:boxStrokeColor="@color/green"
         app:boxStrokeErrorColor="@color/red"
         app:cursorColor="@color/green"
@@ -50,6 +52,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_signin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/email"
@@ -62,7 +65,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         app:boxStrokeColor="@color/green"
         app:boxStrokeErrorColor="@color/red"
         app:cursorColor="@color/green"
@@ -73,6 +76,7 @@
         app:layout_constraintTop_toBottomOf="@id/outlinedTextField_email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_signin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/password"
@@ -96,7 +100,7 @@
         android:id="@+id/button_signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="120dp"
         android:backgroundTint="@color/green"
         android:fontFamily="@font/poppins_regular"
         android:paddingVertical="9dp"
@@ -135,7 +139,7 @@
         app:layout_constraintStart_toEndOf="@id/tv_or_signin_with"
         app:layout_constraintTop_toTopOf="@id/tv_or_signin_with" />
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/imv_google"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -146,7 +150,7 @@
         app:layout_constraintTop_toBottomOf="@id/button_signin"
         app:srcCompat="@drawable/google" />
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/imv_facebook"
         android:layout_width="40dp"
         android:layout_height="40dp"
