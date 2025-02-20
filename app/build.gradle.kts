@@ -50,6 +50,15 @@ dependencies {
     implementation("androidx.credentials:credentials:1.5.0-rc01")
     implementation("androidx.credentials:credentials-play-services-auth:1.5.0-rc01")
     implementation(libs.firebase.firestore)
+    //Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.google.code.gson:gson:2.12.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
