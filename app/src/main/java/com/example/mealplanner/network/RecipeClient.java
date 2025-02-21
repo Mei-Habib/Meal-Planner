@@ -3,7 +3,12 @@ package com.example.mealplanner.network;
 import android.util.Log;
 
 import com.example.mealplanner.network.categories.CategoryResponse;
+import com.example.mealplanner.network.country.Country;
+import com.example.mealplanner.network.country.CountryResponse;
+import com.example.mealplanner.network.randommeal.RandomMeal;
 import com.example.mealplanner.network.randommeal.RandomMealResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,7 +52,7 @@ public class RecipeClient {
         });
     }
 
-    public void getRandomMeal(RandomMealNetworkCallback networkCallback) {
+    public void getRandomMeal(NetworkCallback<List<RandomMeal>> networkCallback) {
         Log.i(TAG, "getDataOverNetwork: ");
         Call<RandomMealResponse> call = service.getRandomMeal();
         call.enqueue(new Callback<RandomMealResponse>() {
@@ -67,4 +72,27 @@ public class RecipeClient {
             }
         });
     }
+
+    public void getCountries(NetworkCallback<List<Country>> networkCallback) {
+        Log.i(TAG, "getDataOverNetwork: ");
+        Call<CountryResponse> call = service.getCountries();
+        call.enqueue(new Callback<CountryResponse>() {
+            @Override
+            public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
+                Log.i(TAG, "onResponse: " + response.body().getCountries().get(1));
+                if (response.body() != null) {
+                    networkCallback.onSuccessResult(response.body().getCountries());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CountryResponse> call, Throwable throwable) {
+                Log.i(TAG, "onFailure: ");
+                networkCallback.onFailureResult(throwable.getMessage().toString());
+                throwable.printStackTrace();
+            }
+        });
+    }
+
+
 }

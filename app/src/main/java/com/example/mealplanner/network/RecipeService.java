@@ -1,6 +1,7 @@
 package com.example.mealplanner.network;
 
 import com.example.mealplanner.network.categories.CategoryResponse;
+import com.example.mealplanner.network.country.CountryResponse;
 import com.example.mealplanner.network.randommeal.RandomMealResponse;
 
 import retrofit2.Call;
@@ -12,6 +13,9 @@ public interface RecipeService {
 
     @GET("random.php")
     Call<RandomMealResponse> getRandomMeal();
+
+    @GET("list.php?a=list")
+    Call<CountryResponse> getCountries();
 }
 
 

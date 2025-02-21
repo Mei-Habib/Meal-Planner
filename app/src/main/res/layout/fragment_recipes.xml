@@ -48,6 +48,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/imv_random_recipe"
             android:layout_width="196dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
@@ -55,15 +56,16 @@
             tools:src="@drawable/chicken" />
 
         <ImageView
+            android:id="@+id/imv_gradient"
             android:layout_width="220dp"
             android:layout_height="151dp"
             android:layout_gravity="start"
             android:scaleType="centerCrop"
-            tools:src="@drawable/gradient" />
+            android:src="@drawable/gradient" />
 
         <TextView
-            android:id="@+id/tv_recipe_title"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_random_recipe_title"
+            android:layout_width="178dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:layout_marginStart="20dp"
@@ -74,8 +76,8 @@
             tools:text="Chicken Ranch\nWrap" />
 
         <TextView
-            android:id="@+id/tv_recipe_description"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_random_recipe_description"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
@@ -84,7 +86,7 @@
             android:gravity="start"
             android:textColor="#6A543B"
             android:textSize="13sp"
-            tools:text="Lorem ipsum dolor sit amet\nconsectetur." />
+            android:text="Lorem ipsum dolor sit amet\nconsectetur." />
     </androidx.cardview.widget.CardView>
 
     <TextView
