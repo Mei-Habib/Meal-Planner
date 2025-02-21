@@ -68,13 +68,14 @@ public class ExploreFragment extends Fragment implements NetworkCallback {
                             Log.e(TAG, "onFailureResult: " + message);
                         }
                     });
-                } else if (chip.getText() == COUNTRIES) {
-                    recipeClient.getCategories(new NetworkCallback<List<Country>>() {
+                } else if (chip.getText().toString().equals(COUNTRIES)) {
+                    recipeClient.getCountries(new NetworkCallback<List<Country>>() {
                         @Override
                         public void onSuccessResult(List<Country> countries) {
                             Log.i(TAG, "onSuccessResult: " + countries.get(1));
                             adapter = new ExploreAdapter(getContext(), 2, countries);
                             recyclerView.setAdapter(adapter);
+//                            adapter.updateList(countries);
                         }
 
                         @Override

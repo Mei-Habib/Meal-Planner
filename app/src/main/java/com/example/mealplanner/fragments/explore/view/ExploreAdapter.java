@@ -2,7 +2,6 @@ package com.example.mealplanner.fragments.explore.view;
 
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +16,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
 import com.example.mealplanner.network.categories.Category;
 import com.example.mealplanner.network.country.Country;
+import com.example.mealplanner.network.ingredients.Ingredient;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHolder> {
 
@@ -30,9 +28,6 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
     private static final int COUNTRY_LAYOUT = 2;
     private static final int INGREDIENT_LAYOUT = 3;
     private int layout;
-//    private List<Category> categories = new ArrayList<>();
-//    private List<Country> countries = new ArrayList<>();
-//    private List<Ingredient> ingredients;
 
     public ExploreAdapter(Context context, int layout, List<?> list) {
         this.context = context;
@@ -50,10 +45,10 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
             itemView = LayoutInflater.from(context).inflate(R.layout.categories_item, parent, false);
             viewHolder = new ViewHolder(itemView);
         } else if (layout == COUNTRY_LAYOUT) {
-            itemView = LayoutInflater.from(context).inflate(R.layout.categories_item, parent, false);
+            itemView = LayoutInflater.from(context).inflate(R.layout.country_item, parent, false);
             viewHolder = new ViewHolder(itemView);
         } else if (layout == INGREDIENT_LAYOUT) {
-            itemView = LayoutInflater.from(context).inflate(R.layout.categories_item, parent, false);
+            itemView = LayoutInflater.from(context).inflate(R.layout.ingredient_item, parent, false);
             viewHolder = new ViewHolder(itemView);
         }
 
@@ -63,7 +58,6 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (layout == CATEGORY_LAYOUT) {
-//            categories = (List<Category>) list.stream().map(e -> (Category) e).collect(Collectors.toList());
             Category category = (Category) list.get(position);
             holder.title.setText(category.getTitle());
             Glide.with(context).load(category.getThumbnail())
@@ -71,10 +65,18 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(holder.thumbnail);
         } else if (layout == COUNTRY_LAYOUT) {
-//            countries = (List<Country>) list.stream().map(e -> (Country) e).collect(Collectors.toList());
             Country country = (Country) list.get(position);
             holder.title.setText(country.getCountry());
+            holder.thumbnail.setImageResource(country.getThumbnail().get(position));
+        } else if (layout == INGREDIENT_LAYOUT) {
+            Ingredient ingredient = (Ingredient) list.get(position);
+            holder.title.setText(ingredient.getIngredient());
+//            Glide.with(context).load(category.getThumbnail())
+//                    .apply(new RequestOptions().override(200, 200))
+//                    .placeholder(R.drawable.ic_launcher_background)
+//                    .into(holder.thumbnail);
         }
+
     }
 
     @Override
@@ -82,11 +84,11 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
         return list.size();
     }
 
-    public void updateList(List<?> list) {
-        this.list.clear();
-        this.list.addAll(list);
-        notifyDataSetChanged();
-    }
+//    public void updateList(List<?> list) {
+//        this.list.clear();
+//        this.list.addAll(list);
+//        notifyDataSetChanged();
+//    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView thumbnail;
@@ -94,8 +96,13 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            thumbnail = itemView.findViewById(R.id.imv_category);
-            title = itemView.findViewById(R.id.tv_category_title);
+            if (layout == CATEGORY_LAYOUT) {
+                thumbnail = itemView.findViewById(R.id.imv_category);
+                title = itemView.findViewById(R.id.tv_category);
+            } else if (layout == COUNTRY_LAYOUT) {
+                thumbnail = itemView.findViewById(R.id.imv_country);
+                title = itemView.findViewById(R.id.tv_country);
+            }
         }
     }
 }

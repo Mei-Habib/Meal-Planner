@@ -7,9 +7,9 @@
     android:paddingRight="8dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="130dp"
-        android:layout_height="56dp"
-        app:cardCornerRadius="25dp"
+        android:layout_width="140dp"
+        android:layout_height="65dp"
+        app:cardCornerRadius="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -18,17 +18,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            tools:src="@drawable/breakfast" />
+            tools:src="@drawable/ramen" />
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:background="@color/black_50"
             android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:letterSpacing=".1"
             android:textColor="@color/white"
             android:textSize="20sp"
-            tools:text="@string/breakfast" />
+            tools:text="Miscellaneous"/>
 
 
     </androidx.cardview.widget.CardView>

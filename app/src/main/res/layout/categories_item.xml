@@ -4,39 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginRight="19dp">
+    android:padding="10dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/category_card"
-        android:layout_width="164dp"
-        android:layout_height="177dp"
-        android:backgroundTint="@color/grey_bg"
-        app:cardCornerRadius="10dp"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imv_category"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imv_category"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            app:shapeAppearance="@style/roundedImageViewRounded"
-            tools:srcCompat="@drawable/ramen" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/roundedImageViewRounded"
+        tools:src="@drawable/ramen" />
 
     <TextView
-        android:id="@+id/tv_category_title"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_category"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_medium"
-        android:textSize="16sp"
+        android:maxLines="1"
+        android:paddingVertical="4dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/category_card"
-        tools:text="Breakfast" />
-
+        app:layout_constraintTop_toBottomOf="@id/imv_category"
+        tools:text="Lunch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,10 @@ public interface RecipeService {
 
     @GET("list.php?a=list")
     Call<CountryResponse> getCountries();
+
+    @GET("list.php?i=list")
+    Call<CountryResponse> getIngredients();
+
 }
 
 
