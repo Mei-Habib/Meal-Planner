@@ -1,6 +1,7 @@
 package com.example.mealplanner.fragments.explore.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,29 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealplanner.R;
+import com.example.mealplanner.fragments.categories.view.CategoriesAdapter;
+import com.example.mealplanner.network.NetworkCallback;
+import com.example.mealplanner.network.RecipeClient;
+import com.example.mealplanner.network.categories.Category;
+import com.example.mealplanner.network.country.Country;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-public class ExploreFragment extends Fragment {
+import java.util.List;
 
+public class ExploreFragment extends Fragment implements NetworkCallback {
+
+    private static final String TAG = "ExploreFragment";
     private SearchView searchView;
     private ChipGroup chipGroup;
     private RecyclerView recyclerView;
+    private ExploreAdapter adapter;
+    private RecipeClient recipeClient;
+    //    private CategoriesAdapter adapter;
+    private static final String CATEGORIES = "Categories";
+    private static final String COUNTRIES = "Countries";
+    private static final String INGREDIENTS = "Ingredients";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,15 +48,52 @@ public class ExploreFragment extends Fragment {
         searchView = view.findViewById(R.id.search_view);
         chipGroup = view.findViewById(R.id.chip_group);
         recyclerView = view.findViewById(R.id.recyclerView_explore);
+        recipeClient = new RecipeClient();
 
-        for(int i=0; i<chipGroup.getChildCount(); i++){
+        for (int i = 0; i < chipGroup.getChildCount(); i++) {
             Chip chip = (Chip) chipGroup.getChildAt(i);
-            chip.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            chip.setOnClickListener(v -> {
+                if (chip.getText().toString().equals(CATEGORIES)) {
+                    recipeClient.getCategories(new NetworkCallback<List<Category>>() {
+                        @Override
+                        public void onSuccessResult(List<Category> categories) {
+                            Log.i(TAG, "onSuccessResult: " + categories.get(1));
+                            adapter = new ExploreAdapter(getContext(), 1, categories);
+                            recyclerView.setAdapter(adapter);
+//                            adapter.updateList(categories);
+                        }
 
+                        @Override
+                        public void onFailureResult(String message) {
+                            Log.e(TAG, "onFailureResult: " + message);
+                        }
+                    });
+                } else if (chip.getText() == COUNTRIES) {
+                    recipeClient.getCategories(new NetworkCallback<List<Country>>() {
+                        @Override
+                        public void onSuccessResult(List<Country> countries) {
+                            Log.i(TAG, "onSuccessResult: " + countries.get(1));
+                            adapter = new ExploreAdapter(getContext(), 2, countries);
+                            recyclerView.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onFailureResult(String message) {
+                            Log.e(TAG, "onFailureResult: " + message);
+                        }
+                    });
                 }
             });
         }
+    }
+
+    @Override
+    public void onSuccessResult(Object result) {
+
+    }
+
+    @Override
+    public void onFailureResult(String message) {
+
     }
 }
