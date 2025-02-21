@@ -2,13 +2,13 @@ package com.example.mealplanner.network;
 
 import android.util.Log;
 
-import com.example.mealplanner.network.categories.CategoryResponse;
-import com.example.mealplanner.network.country.Country;
-import com.example.mealplanner.network.country.CountryResponse;
-import com.example.mealplanner.network.randommeal.RandomMeal;
-import com.example.mealplanner.network.randommeal.RandomMealResponse;
-import com.example.mealplanner.network.recipes.Recipe;
-import com.example.mealplanner.network.recipes.RecipeResponse;
+import com.example.mealplanner.model.categories.CategoryResponse;
+import com.example.mealplanner.model.countries.Country;
+import com.example.mealplanner.model.countries.CountryResponse;
+import com.example.mealplanner.model.randommeal.RandomMeal;
+import com.example.mealplanner.model.randommeal.RandomMealResponse;
+import com.example.mealplanner.model.recipes.Recipe;
+import com.example.mealplanner.model.recipes.RecipeResponse;
 
 import java.util.List;
 
@@ -18,13 +18,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RecipeClient {
+public class RecipeRemoteDataSource {
 
     public static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
     public static final String TAG = "RecipeClient";
     private RecipeService service;
 
-    public RecipeClient() {
+    public RecipeRemoteDataSource() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

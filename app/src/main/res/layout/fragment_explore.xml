@@ -33,6 +33,7 @@
             android:iconifiedByDefault="false"
             android:paddingLeft="10dp"
             android:paddingRight="5dp"
+            android:backgroundTint="@color/greyAlpha"
             android:queryBackground="@android:color/transparent"
             android:queryHint="What are you craving?"
             android:searchIcon="@drawable/search_ic"
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="19dp"
-            app:chipSpacingHorizontal="16dp"
+            app:chipSpacingHorizontal="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_view"
@@ -52,26 +53,20 @@
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/categoriesFragment"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+                style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-
                 android:text="@string/categories" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+                style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
                 android:text="@string/countries"
-                android:textSize="16sp"
-                app:chipCornerRadius="40dp"
-                app:chipStrokeColor="@color/light_grey" />
+                app:chipCornerRadius="40dp" />
 
             <com.google.android.material.chip.Chip
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+                style="@style/CustomChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ingredients" />

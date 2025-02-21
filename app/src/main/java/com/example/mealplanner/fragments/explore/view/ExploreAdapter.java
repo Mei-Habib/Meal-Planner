@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
-import com.example.mealplanner.network.categories.Category;
-import com.example.mealplanner.network.country.Country;
-import com.example.mealplanner.network.ingredients.Ingredient;
+import com.example.mealplanner.model.categories.Category;
+import com.example.mealplanner.model.countries.Country;
+import com.example.mealplanner.model.ingredients.Ingredient;
 
 import java.util.List;
 

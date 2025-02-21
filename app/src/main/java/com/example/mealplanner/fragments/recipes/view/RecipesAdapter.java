@@ -13,32 +13,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
+import com.example.mealplanner.model.recipes.Recipe;
 
 import java.util.List;
 
-/*
-public class RecipesAdapter extends RecyclerView.Adapter<com.example.mealplanner.fragments.recipes.view.RecipesAdapter.ViewHolder> {
+
+public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
 
     private Context context;
-    private List<Recipe> categories;
+    private List<Recipe> recipes;
 
-    public RecipesAdapter(Context context, List<Recipe> categories) {
+    public RecipesAdapter(Context context, List<Recipe> recipes) {
         this.context = context;
-        this.categories = categories;
+        this.recipes = recipes;
     }
 
     @NonNull
     @Override
-    public com.example.mealplanner.fragments.recipes.view.RecipesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.category_item, parent, false);
-        com.example.mealplanner.fragments.categories.view.CategoriesAdapter.ViewHolder viewHolder = new com.example.mealplanner.fragments.categories.view.CategoriesAdapter.ViewHolder(itemView);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(context).inflate(R.layout.recipe_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.example.mealplanner.fragments.recipes.view.RecipesAdapter.ViewHolder holder, int position) {
-        holder.title.setText(categories.get(position).getTitle());
-        Glide.with(context).load(categories.get(position).getThumbnail())
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.title.setText(recipes.get(position).getTitle());
+        holder.preparationTime.setText("---");
+        holder.category.setText(recipes.get(position).getCategory());
+        Glide.with(context).load(recipes.get(position).getThumbnail())
                 .apply(new RequestOptions().override(200, 200))
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(holder.thumbnail);
@@ -46,20 +49,21 @@ public class RecipesAdapter extends RecyclerView.Adapter<com.example.mealplanner
 
     @Override
     public int getItemCount() {
-        return categories.size();
+        return recipes.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView thumbnail;
         TextView title;
+        TextView preparationTime;
+        TextView category;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            thumbnail = itemView.findViewById(R.id.imv_thumbnail);
-            title = itemView.findViewById(R.id.tv_title);
+            thumbnail = itemView.findViewById(R.id.imv_recipe_thumbnail);
+            title = itemView.findViewById(R.id.tv_recipe_title);
+            preparationTime = itemView.findViewById(R.id.tv_prepTime);
+            category = itemView.findViewById(R.id.tv_recipe_category);
         }
     }
 }
-
-}
-*/

@@ -1,4 +1,4 @@
-package com.example.mealplanner.network.recipes;
+package com.example.mealplanner.model.recipes;
 
 import java.util.List;
 

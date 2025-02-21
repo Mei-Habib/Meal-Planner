@@ -7,13 +7,14 @@
     android:paddingRight="8dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="140dp"
-        android:layout_height="65dp"
+        android:layout_width="130dp"
+        android:layout_height="56dp"
         app:cardCornerRadius="30dp"
+        app:cardElevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imv_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

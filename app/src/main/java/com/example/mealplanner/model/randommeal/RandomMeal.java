@@ -1,4 +1,4 @@
-package com.example.mealplanner.network.randommeal;
+package com.example.mealplanner.model.randommeal;
 
 import com.google.gson.annotations.SerializedName;
 

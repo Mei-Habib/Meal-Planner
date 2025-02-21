@@ -1,4 +1,4 @@
-package com.example.mealplanner.network.ingredients;
+package com.example.mealplanner.model.ingredients;
 
 import com.google.gson.annotations.SerializedName;
 

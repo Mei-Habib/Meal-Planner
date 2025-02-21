@@ -17,23 +17,26 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
 import com.example.mealplanner.fragments.categories.view.CategoriesAdapter;
+import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.network.NetworkCallback;
-import com.example.mealplanner.network.RecipeClient;
-import com.example.mealplanner.network.categories.Category;
-import com.example.mealplanner.network.randommeal.RandomMeal;
+import com.example.mealplanner.network.RecipeRemoteDataSource;
+import com.example.mealplanner.model.categories.Category;
+import com.example.mealplanner.model.randommeal.RandomMeal;
 
 import java.util.List;
 
-public class RecipesFragment extends Fragment implements NetworkCallback<List<Category>> {
+public class RecipesFragment extends Fragment implements NetworkCallback {
 
     private static final String TAG = "RecipesFragment";
     private RecyclerView categoriesRecyclerView;
+    private RecyclerView recipesRecyclerView;
+    private RecipesAdapter recipesAdapter;
     private CategoriesAdapter categoriesAdapter;
-    private RecipeClient recipeClient;
+    private RecipeRemoteDataSource recipeRemoteDataSource;
     private ImageView randomRecipeImageVIew;
-    private ImageView gradientImageView;
+    //    private ImageView gradientImageView;
     private TextView randomRecipeTitle;
-    private TextView randomRecipeDescription;
+//    private TextView randomRecipeDescription;
 
     @Nullable
     @Override
@@ -45,29 +48,17 @@ public class RecipesFragment extends Fragment implements NetworkCallback<List<Ca
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         randomRecipeImageVIew = view.findViewById(R.id.imv_random_recipe);
-        gradientImageView = view.findViewById(R.id.imv_gradient);
+//        gradientImageView = view.findViewById(R.id.imv_gradient);
         randomRecipeTitle = view.findViewById(R.id.tv_random_recipe_title);
-        randomRecipeDescription = view.findViewById(R.id.tv_random_recipe_description);
+//        randomRecipeDescription = view.findViewById(R.id.tv_random_recipe_description);
         categoriesRecyclerView = view.findViewById(R.id.rv_categories);
-        recipeClient = new RecipeClient();
-        recipeClient.getCategories(new NetworkCallback<List<Category>>() {
-            @Override
-            public void onSuccessResult(List<Category> categories) {
-                Log.i(TAG, "onSuccessResult - Categories: " + categories.get(1));
-                categoriesAdapter = new CategoriesAdapter(getContext(), categories);
-                categoriesRecyclerView.setAdapter(categoriesAdapter);
-            }
+        recipesRecyclerView = view.findViewById(R.id.rv_recipes);
+        recipeRemoteDataSource = new RecipeRemoteDataSource();
 
-            @Override
-            public void onFailureResult(String message) {
-
-            }
-        });
-
-        recipeClient.getRandomMeal(new NetworkCallback<List<RandomMeal>>() {
+        recipeRemoteDataSource.getRandomMeal(new NetworkCallback<List<RandomMeal>>() {
             @Override
             public void onSuccessResult(List<RandomMeal> randomMeal) {
-                Log.i(TAG, "onSuccessResult - RandomMeal: " + randomMeal.get(0));
+                Log.i(TAG, "onSuccessResult: " + randomMeal.get(0));
                 randomRecipeTitle.setText(randomMeal.get(0).getTitle());
 //                randomRecipeDescription.setText(randomMeal.get(0).getTags());
                 Glide.with(getContext()).load(randomMeal.get(0).getThumbnail())
@@ -81,10 +72,40 @@ public class RecipesFragment extends Fragment implements NetworkCallback<List<Ca
                 Log.e(TAG, "onFailureResult: " + message);
             }
         });
+
+        recipeRemoteDataSource.getCategories(new NetworkCallback<List<Category>>() {
+            @Override
+            public void onSuccessResult(List<Category> categories) {
+                Log.i(TAG, "onSuccessResult: " + categories.get(1));
+                categoriesAdapter = new CategoriesAdapter(getContext(), categories);
+                categoriesRecyclerView.setAdapter(categoriesAdapter);
+            }
+
+            @Override
+            public void onFailureResult(String message) {
+
+            }
+        });
+
+        recipeRemoteDataSource.getRecipes(new NetworkCallback<List<Recipe>>() {
+            @Override
+            public void onSuccessResult(List<Recipe> recipes) {
+                Log.i(TAG, "onSuccessResult: " + recipes.get(0));
+                recipesAdapter = new RecipesAdapter(getContext(), recipes);
+                recipesRecyclerView.setAdapter(recipesAdapter);
+            }
+
+            @Override
+            public void onFailureResult(String message) {
+                Log.e(TAG, "onFailureResult: " + message);
+            }
+        });
+
+
     }
 
     @Override
-    public void onSuccessResult(List<Category> result) {
+    public void onSuccessResult(Object result) {
 
     }
 
