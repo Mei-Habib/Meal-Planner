@@ -15,12 +15,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/imv_recipe"
             android:layout_width="match_parent"
             android:layout_height="129dp"
             android:scaleType="centerCrop"
             tools:src="@drawable/roasted_chicken" />
 
         <TextView
+            android:id="@+id/tv_recipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -40,6 +42,7 @@
             android:src="@drawable/hour_ic" />
 
         <TextView
+            android:id="@+id/tv_prepTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -59,6 +62,7 @@
             android:src="@drawable/bookmark" />
 
         <TextView
+            android:id="@+id/tv_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

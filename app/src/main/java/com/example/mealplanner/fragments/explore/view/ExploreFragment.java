@@ -31,7 +31,6 @@ public class ExploreFragment extends Fragment implements NetworkCallback {
     private RecyclerView recyclerView;
     private ExploreAdapter adapter;
     private RecipeClient recipeClient;
-    //    private CategoriesAdapter adapter;
     private static final String CATEGORIES = "Categories";
     private static final String COUNTRIES = "Countries";
     private static final String INGREDIENTS = "Ingredients";

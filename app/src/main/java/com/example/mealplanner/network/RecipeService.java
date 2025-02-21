@@ -3,6 +3,7 @@ package com.example.mealplanner.network;
 import com.example.mealplanner.network.categories.CategoryResponse;
 import com.example.mealplanner.network.country.CountryResponse;
 import com.example.mealplanner.network.randommeal.RandomMealResponse;
+import com.example.mealplanner.network.recipes.RecipeResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -20,6 +21,8 @@ public interface RecipeService {
     @GET("list.php?i=list")
     Call<CountryResponse> getIngredients();
 
+    @GET("search.php?f=f")
+    Call<RecipeResponse> getRecipes();
 }
 
 

@@ -7,6 +7,8 @@ import com.example.mealplanner.network.country.Country;
 import com.example.mealplanner.network.country.CountryResponse;
 import com.example.mealplanner.network.randommeal.RandomMeal;
 import com.example.mealplanner.network.randommeal.RandomMealResponse;
+import com.example.mealplanner.network.recipes.Recipe;
+import com.example.mealplanner.network.recipes.RecipeResponse;
 
 import java.util.List;
 
@@ -87,6 +89,27 @@ public class RecipeClient {
 
             @Override
             public void onFailure(Call<CountryResponse> call, Throwable throwable) {
+                Log.i(TAG, "onFailure: ");
+                networkCallback.onFailureResult(throwable.getMessage().toString());
+                throwable.printStackTrace();
+            }
+        });
+    }
+
+    public void getRecipes(NetworkCallback<List<Recipe>> networkCallback) {
+        Log.i(TAG, "getDataOverNetwork: ");
+        Call<RecipeResponse> call = service.getRecipes();
+        call.enqueue(new Callback<RecipeResponse>() {
+            @Override
+            public void onResponse(Call<RecipeResponse> call, Response<RecipeResponse> response) {
+                Log.i(TAG, "onResponse: " + response.body().getRecipes().get(1));
+                if (response.body() != null) {
+                    networkCallback.onSuccessResult(response.body().getRecipes());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecipeResponse> call, Throwable throwable) {
                 Log.i(TAG, "onFailure: ");
                 networkCallback.onFailureResult(throwable.getMessage().toString());
                 throwable.printStackTrace();
