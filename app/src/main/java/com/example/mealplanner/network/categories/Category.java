@@ -26,12 +26,8 @@ public class Category {
         this.id = id;
     }
 
-    public String getCategory() {
+    public String getTitle() {
         return title;
-    }
-
-    public void setCategory(String title) {
-        this.title = title;
     }
 
     public String getThumbnail() {

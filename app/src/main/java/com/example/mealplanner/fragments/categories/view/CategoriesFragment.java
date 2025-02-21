@@ -1,4 +1,4 @@
-package com.example.mealplanner.fragments;
+package com.example.mealplanner.fragments.categories.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -47,7 +47,7 @@
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/"
+           android:id="@+id/categoriesFragment"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.fragment.app.FragmentContainerView
-        android:name="com.example.mealplanner.fragments.CategoriesFragment"
+        android:name="com.example.mealplanner.fragments.categories.view.CategoriesFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"

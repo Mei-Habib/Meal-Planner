@@ -3,6 +3,7 @@ package com.example.mealplanner.network;
 import android.util.Log;
 
 import com.example.mealplanner.network.categories.CategoryResponse;
+import com.example.mealplanner.network.randommeal.RandomMealResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,13 +26,13 @@ public class RecipeClient {
         service = retrofit.create(RecipeService.class);
     }
 
-    public void getDataOverNetwork(NetworkCallback networkCallback) {
+    public void getCategories(NetworkCallback networkCallback) {
         Log.i(TAG, "getDataOverNetwork: ");
         Call<CategoryResponse> call = service.getCategories();
         call.enqueue(new Callback<CategoryResponse>() {
             @Override
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
-                Log.i(TAG, "onResponse: ");
+                Log.i(TAG, "onResponse: " + response.body().getCategories().get(1));
                 if (response.body() != null) {
                     networkCallback.onSuccessResult(response.body().getCategories());
                 }
@@ -44,6 +45,26 @@ public class RecipeClient {
                 throwable.printStackTrace();
             }
         });
+    }
 
+    public void getRandomMeal(RandomMealNetworkCallback networkCallback) {
+        Log.i(TAG, "getDataOverNetwork: ");
+        Call<RandomMealResponse> call = service.getRandomMeal();
+        call.enqueue(new Callback<RandomMealResponse>() {
+            @Override
+            public void onResponse(Call<RandomMealResponse> call, Response<RandomMealResponse> response) {
+                Log.i(TAG, "onResponse: " + response.body().getMeal());
+                if (response.body() != null) {
+                    networkCallback.onSuccessResult(response.body().getMeal());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RandomMealResponse> call, Throwable throwable) {
+                Log.i(TAG, "onFailure: ");
+                networkCallback.onFailureResult(throwable.getMessage().toString());
+                throwable.printStackTrace();
+            }
+        });
     }
 }
