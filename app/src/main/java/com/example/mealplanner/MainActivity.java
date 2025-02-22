@@ -11,6 +11,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.mealplanner.fragments.recipes.view.RecipesAdapter;
+import com.example.mealplanner.model.recipes.Recipe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.shape.CornerFamily;
@@ -19,7 +21,6 @@ import com.google.android.material.shape.MaterialShapeDrawable;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    private NavigationView navigationView;
     NavController navController;
     ;
     private NavHostFragment navHostFragment;
@@ -37,4 +38,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 }

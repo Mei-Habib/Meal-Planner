@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -25,7 +26,7 @@ import com.example.mealplanner.model.randommeal.RandomMeal;
 
 import java.util.List;
 
-public class RecipesFragment extends Fragment implements NetworkCallback {
+public class RecipesFragment extends Fragment implements NetworkCallback, RecipesAdapter.OnRecipeClickListener {
 
     private static final String TAG = "RecipesFragment";
     private RecyclerView categoriesRecyclerView;
@@ -91,7 +92,7 @@ public class RecipesFragment extends Fragment implements NetworkCallback {
             @Override
             public void onSuccessResult(List<Recipe> recipes) {
                 Log.i(TAG, "onSuccessResult: " + recipes.get(0));
-                recipesAdapter = new RecipesAdapter(getContext(), recipes);
+                recipesAdapter = new RecipesAdapter(getContext(), RecipesFragment.this::onRecipeClickListener, recipes);
                 recipesRecyclerView.setAdapter(recipesAdapter);
             }
 
@@ -115,4 +116,8 @@ public class RecipesFragment extends Fragment implements NetworkCallback {
     }
 
 
+    @Override
+    public void onRecipeClickListener(Recipe recipe) {
+        Navigation.findNavController(getView()).navigate(R.id.action_recipesFragment_to_recipeDetailsFragment);
+    }
 }

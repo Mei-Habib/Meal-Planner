@@ -37,4 +37,7 @@
     <string name="profile">Profile</string>
     <string name="countries">Countries</string>
     <string name="ingredients">Ingredients</string>
+    <string name="description">Description</string>
+    <string name="cuisine">Cuisine</string>
+    <string name="cooking_time">Cooking Time</string>
 </resources>

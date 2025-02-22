@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/recipesFragment"
         android:name="com.example.mealplanner.fragments.recipes.view.RecipesFragment"
-        android:label="RecipesFragment" />
+        android:label="RecipesFragment" >
+        <action
+            android:id="@+id/action_recipesFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/exploreFragment"
         android:name="com.example.mealplanner.fragments.explore.view.ExploreFragment"
@@ -28,4 +32,8 @@
         android:id="@+id/categoriesFragment"
         android:name="com.example.mealplanner.fragments.categories.view.CategoriesFragment"
         android:label="CategoriesFragment" />
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="com.example.mealplanner.fragments.recipedetails.view.RecipeDetailsFragment"
+        android:label="RecipeDetailsFragment" />
 </navigation>

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
 import com.example.mealplanner.model.recipes.Recipe;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
@@ -22,10 +23,12 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     private Context context;
     private List<Recipe> recipes;
+    private OnRecipeClickListener onRecipeClickListener;
 
-    public RecipesAdapter(Context context, List<Recipe> recipes) {
+    public RecipesAdapter(Context context, OnRecipeClickListener onRecipeClickListener, List<Recipe> recipes) {
         this.context = context;
         this.recipes = recipes;
+        this.onRecipeClickListener = onRecipeClickListener;
     }
 
     @NonNull
@@ -45,6 +48,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                 .apply(new RequestOptions().override(200, 200))
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(holder.thumbnail);
+
+        holder.cardView.setOnClickListener(view -> {
+            onRecipeClickListener.onRecipeClickListener(recipes.get(position));
+        });
     }
 
     @Override
@@ -53,6 +60,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+
+        MaterialCardView cardView;
         ImageView thumbnail;
         TextView title;
         TextView preparationTime;
@@ -60,10 +69,15 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.cardView_recipe);
             thumbnail = itemView.findViewById(R.id.imv_recipe_thumbnail);
             title = itemView.findViewById(R.id.tv_recipe_title);
             preparationTime = itemView.findViewById(R.id.tv_prepTime);
             category = itemView.findViewById(R.id.tv_recipe_category);
         }
+    }
+
+    public interface OnRecipeClickListener {
+        void onRecipeClickListener(Recipe recipe);
     }
 }
