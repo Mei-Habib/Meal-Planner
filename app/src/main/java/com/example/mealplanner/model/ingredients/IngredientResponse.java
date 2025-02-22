@@ -13,11 +13,4 @@ public class IngredientResponse {
         return ingredients;
     }
 
-    @Override
-    public String toString() {
-        return
-                "Response{" +
-                        "ingredients = '" + ingredients + '\'' +
-                        "}";
-    }
 }

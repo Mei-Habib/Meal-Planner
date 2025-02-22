@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealplanner.R;
+import com.example.mealplanner.model.ingredients.Ingredient;
 import com.example.mealplanner.network.NetworkCallback;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 import com.example.mealplanner.model.categories.Category;
@@ -72,6 +73,21 @@ public class ExploreFragment extends Fragment implements NetworkCallback {
                         public void onSuccessResult(List<Country> countries) {
                             Log.i(TAG, "onSuccessResult: " + countries.get(1));
                             adapter = new ExploreAdapter(getContext(), 2, countries);
+                            recyclerView.setAdapter(adapter);
+//                            adapter.updateList(countries);
+                        }
+
+                        @Override
+                        public void onFailureResult(String message) {
+                            Log.e(TAG, "onFailureResult: " + message);
+                        }
+                    });
+                } else if (chip.getText().toString().equals(INGREDIENTS)) {
+                    recipeRemoteDataSource.getIngredients(new NetworkCallback<List<Ingredient>>() {
+                        @Override
+                        public void onSuccessResult(List<Ingredient> ingredients) {
+                            Log.i(TAG, "onSuccessResult: " + ingredients.get(1));
+                            adapter = new ExploreAdapter(getContext(), 3, ingredients);
                             recyclerView.setAdapter(adapter);
 //                            adapter.updateList(countries);
                         }

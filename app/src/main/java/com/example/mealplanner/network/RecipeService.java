@@ -2,27 +2,32 @@ package com.example.mealplanner.network;
 
 import com.example.mealplanner.model.categories.CategoryResponse;
 import com.example.mealplanner.model.countries.CountryResponse;
+import com.example.mealplanner.model.ingredients.IngredientResponse;
 import com.example.mealplanner.model.randommeal.RandomMealResponse;
 import com.example.mealplanner.model.recipes.RecipeResponse;
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface RecipeService {
-    @GET("categories.php")
+    @GET("api/json/v1/1/categories.php")
     Call<CategoryResponse> getCategories();
 
-    @GET("random.php")
+    @GET("api/json/v1/1/random.php")
     Call<RandomMealResponse> getRandomMeal();
 
-    @GET("list.php?a=list")
+    @GET("api/json/v1/1/list.php?a=list")
     Call<CountryResponse> getCountries();
 
-    @GET("list.php?i=list")
-    Call<CountryResponse> getIngredients();
+    @GET("api/json/v1/1/list.php?i=list")
+    Call<IngredientResponse> getIngredients();
 
-    @GET("search.php?f=f")
+    @GET("api/json/v1/1/search.php?f=f")
     Call<RecipeResponse> getRecipes();
+
+//    @GET("images/ingredients/{ingredient}")
+//    Call<Integer> getIngredientThumbnail();
 }
 
 

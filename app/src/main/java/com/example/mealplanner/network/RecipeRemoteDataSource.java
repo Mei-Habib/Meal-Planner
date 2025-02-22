@@ -5,6 +5,8 @@ import android.util.Log;
 import com.example.mealplanner.model.categories.CategoryResponse;
 import com.example.mealplanner.model.countries.Country;
 import com.example.mealplanner.model.countries.CountryResponse;
+import com.example.mealplanner.model.ingredients.Ingredient;
+import com.example.mealplanner.model.ingredients.IngredientResponse;
 import com.example.mealplanner.model.randommeal.RandomMeal;
 import com.example.mealplanner.model.randommeal.RandomMealResponse;
 import com.example.mealplanner.model.recipes.Recipe;
@@ -20,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RecipeRemoteDataSource {
 
-    public static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
+    public static final String BASE_URL = "https://www.themealdb.com/";
     public static final String TAG = "RecipeClient";
     private RecipeService service;
 
@@ -110,6 +112,27 @@ public class RecipeRemoteDataSource {
 
             @Override
             public void onFailure(Call<RecipeResponse> call, Throwable throwable) {
+                Log.i(TAG, "onFailure: ");
+                networkCallback.onFailureResult(throwable.getMessage().toString());
+                throwable.printStackTrace();
+            }
+        });
+    }
+
+    public void getIngredients(NetworkCallback<List<Ingredient>> networkCallback) {
+        Log.i(TAG, "getDataOverNetwork: ");
+        Call<IngredientResponse> call = service.getIngredients();
+        call.enqueue(new Callback<IngredientResponse>() {
+            @Override
+            public void onResponse(Call<IngredientResponse> call, Response<IngredientResponse> response) {
+                Log.i(TAG, "onResponse: " + response.body().getIngredients().get(1));
+                if (response.body() != null) {
+                    networkCallback.onSuccessResult(response.body().getIngredients());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IngredientResponse> call, Throwable throwable) {
                 Log.i(TAG, "onFailure: ");
                 networkCallback.onFailureResult(throwable.getMessage().toString());
                 throwable.printStackTrace();

@@ -69,12 +69,15 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
             holder.title.setText(country.getCountry());
             holder.thumbnail.setImageResource(country.getThumbnail().get(position));
         } else if (layout == INGREDIENT_LAYOUT) {
+//            String ingredientTitle = "";
+            String thumbnailUrl;
             Ingredient ingredient = (Ingredient) list.get(position);
+            thumbnailUrl = "https://www.themealdb.com/images/ingredients/" + ingredient.getIngredient() + ".png";
             holder.title.setText(ingredient.getIngredient());
-//            Glide.with(context).load(category.getThumbnail())
-//                    .apply(new RequestOptions().override(200, 200))
-//                    .placeholder(R.drawable.ic_launcher_background)
-//                    .into(holder.thumbnail);
+            Glide.with(context).load(thumbnailUrl)
+                    .apply(new RequestOptions().override(200, 200))
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .into(holder.thumbnail);
         }
 
     }
@@ -102,6 +105,9 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
             } else if (layout == COUNTRY_LAYOUT) {
                 thumbnail = itemView.findViewById(R.id.imv_country);
                 title = itemView.findViewById(R.id.tv_country);
+            } else if (layout == INGREDIENT_LAYOUT) {
+                title = itemView.findViewById(R.id.tv_ingredient_title);
+                thumbnail = itemView.findViewById(R.id.imv_ingredient_thumbnail);
             }
         }
     }
