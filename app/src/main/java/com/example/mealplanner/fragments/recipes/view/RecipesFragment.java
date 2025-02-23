@@ -115,9 +115,11 @@ public class RecipesFragment extends Fragment implements NetworkCallback, Recipe
 
     }
 
-
     @Override
     public void onRecipeClickListener(Recipe recipe) {
-        Navigation.findNavController(getView()).navigate(R.id.action_recipesFragment_to_recipeDetailsFragment);
+        Log.i(TAG, "onRecipeClickListener: " + recipe.getIngredients().get(1));
+        RecipesFragmentDirections.ActionRecipesFragmentToRecipeDetailsFragment action
+                = RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(recipe);
+        Navigation.findNavController(getView()).navigate(action);
     }
 }

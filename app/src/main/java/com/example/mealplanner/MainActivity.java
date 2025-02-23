@@ -1,5 +1,6 @@
 package com.example.mealplanner;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -7,10 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.mealplanner.fragments.recipedetails.view.RecipeDetailsFragment;
 import com.example.mealplanner.fragments.recipes.view.RecipesAdapter;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

@@ -69,7 +69,6 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
             holder.title.setText(country.getCountry());
             holder.thumbnail.setImageResource(country.getThumbnail().get(position));
         } else if (layout == INGREDIENT_LAYOUT) {
-//            String ingredientTitle = "";
             String thumbnailUrl;
             Ingredient ingredient = (Ingredient) list.get(position);
             thumbnailUrl = "https://www.themealdb.com/images/ingredients/" + ingredient.getIngredient() + ".png";

@@ -7,10 +7,12 @@
     <fragment
         android:id="@+id/recipesFragment"
         android:name="com.example.mealplanner.fragments.recipes.view.RecipesFragment"
-        android:label="RecipesFragment" >
+        android:label="RecipesFragment">
         <action
             android:id="@+id/action_recipesFragment_to_recipeDetailsFragment"
-            app:destination="@id/recipeDetailsFragment" />
+            app:destination="@id/recipeDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
@@ -35,5 +37,15 @@
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="com.example.mealplanner.fragments.recipedetails.view.RecipeDetailsFragment"
-        android:label="RecipeDetailsFragment" />
+        android:label="RecipeDetailsFragment">
+        <action
+            android:id="@+id/action_recipeDetailsFragment_to_recipesFragment"
+            app:destination="@id/recipesFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/recipesFragment" />
+        <argument
+            android:name="recipe"
+            app:argType="com.example.mealplanner.model.recipes.Recipe" />
+    </fragment>
 </navigation>

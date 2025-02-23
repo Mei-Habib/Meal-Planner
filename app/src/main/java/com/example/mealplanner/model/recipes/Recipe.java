@@ -1,8 +1,16 @@
 package com.example.mealplanner.model.recipes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Recipe {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Recipe implements Parcelable {
     @SerializedName("strIngredient10")
     private String ingredient10;
 
@@ -146,6 +154,124 @@ public class Recipe {
 
     @SerializedName("strMeasure15")
     private String measure15;
+
+
+    protected Recipe(Parcel in) {
+        ingredient10 = in.readString();
+        ingredient12 = in.readString();
+        ingredient11 = in.readString();
+        ingredient14 = in.readString();
+        category = in.readString();
+        ingredient13 = in.readString();
+        ingredient16 = in.readString();
+        ingredient15 = in.readString();
+        ingredient18 = in.readString();
+        ingredient17 = in.readString();
+        cuisine = in.readString();
+        ingredient19 = in.readString();
+        tags = in.readString();
+        id = in.readString();
+        instructions = in.readString();
+        ingredient1 = in.readString();
+        ingredient3 = in.readString();
+        ingredient2 = in.readString();
+        ingredient20 = in.readString();
+        ingredient5 = in.readString();
+        ingredient4 = in.readString();
+        ingredient7 = in.readString();
+        ingredient6 = in.readString();
+        ingredient9 = in.readString();
+        ingredient8 = in.readString();
+        thumbnail = in.readString();
+        measure20 = in.readString();
+        youtubeURL = in.readString();
+        title = in.readString();
+        measure12 = in.readString();
+        measure13 = in.readString();
+        measure10 = in.readString();
+        measure11 = in.readString();
+        measure9 = in.readString();
+        measure7 = in.readString();
+        measure8 = in.readString();
+        measure5 = in.readString();
+        measure6 = in.readString();
+        measure3 = in.readString();
+        measure4 = in.readString();
+        measure1 = in.readString();
+        measure18 = in.readString();
+        measure2 = in.readString();
+        measure19 = in.readString();
+        measure16 = in.readString();
+        measure17 = in.readString();
+        measure14 = in.readString();
+        measure15 = in.readString();
+    }
+
+    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
+        @Override
+        public Recipe createFromParcel(Parcel in) {
+            return new Recipe(in);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
+
+    public List<String> getIngredients() {
+        List<String> ingredients = new ArrayList<>();
+        ingredients.add(ingredient1);
+        ingredients.add(ingredient2);
+        ingredients.add(ingredient3);
+        ingredients.add(ingredient4);
+        ingredients.add(ingredient5);
+        ingredients.add(ingredient6);
+        ingredients.add(ingredient7);
+        ingredients.add(ingredient8);
+        ingredients.add(ingredient9);
+        ingredients.add(ingredient10);
+        ingredients.add(ingredient11);
+        ingredients.add(ingredient12);
+        ingredients.add(ingredient13);
+        ingredients.add(ingredient14);
+        ingredients.add(ingredient15);
+        ingredients.add(ingredient16);
+        ingredients.add(ingredient17);
+        ingredients.add(ingredient18);
+        ingredients.add(ingredient19);
+        ingredients.add(ingredient20);
+        // Remove null values
+        ingredients.removeIf(item -> item == null || item.isEmpty());
+        return ingredients;
+    }
+
+    public List<String> getMeasures() {
+        List<String> measures = new ArrayList<>();
+        measures.add(measure1);
+        measures.add(measure2);
+        measures.add(measure3);
+        measures.add(measure4);
+        measures.add(measure5);
+        measures.add(measure6);
+        measures.add(measure7);
+        measures.add(measure8);
+        measures.add(measure9);
+        measures.add(measure10);
+        measures.add(measure11);
+        measures.add(measure12);
+        measures.add(measure13);
+        measures.add(measure14);
+        measures.add(measure15);
+        measures.add(measure16);
+        measures.add(measure17);
+        measures.add(measure18);
+        measures.add(measure19);
+        measures.add(measure20);
+        // Remove null values
+        measures.removeIf(item -> item == null || item.isEmpty());
+        return measures;
+    }
 
     public String getIngredient10() {
         return ingredient10;
@@ -351,5 +477,62 @@ public class Recipe {
                         ",youtubeURL = '" + youtubeURL + '\'' +
                         ",title = '" + title + '\'' +
                         "}";
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(ingredient10);
+        dest.writeString(ingredient12);
+        dest.writeString(ingredient11);
+        dest.writeString(ingredient14);
+        dest.writeString(category);
+        dest.writeString(ingredient13);
+        dest.writeString(ingredient16);
+        dest.writeString(ingredient15);
+        dest.writeString(ingredient18);
+        dest.writeString(ingredient17);
+        dest.writeString(cuisine);
+        dest.writeString(ingredient19);
+        dest.writeString(tags);
+        dest.writeString(id);
+        dest.writeString(instructions);
+        dest.writeString(ingredient1);
+        dest.writeString(ingredient3);
+        dest.writeString(ingredient2);
+        dest.writeString(ingredient20);
+        dest.writeString(ingredient5);
+        dest.writeString(ingredient4);
+        dest.writeString(ingredient7);
+        dest.writeString(ingredient6);
+        dest.writeString(ingredient9);
+        dest.writeString(ingredient8);
+        dest.writeString(thumbnail);
+        dest.writeString(measure20);
+        dest.writeString(youtubeURL);
+        dest.writeString(title);
+        dest.writeString(measure12);
+        dest.writeString(measure13);
+        dest.writeString(measure10);
+        dest.writeString(measure11);
+        dest.writeString(measure9);
+        dest.writeString(measure7);
+        dest.writeString(measure8);
+        dest.writeString(measure5);
+        dest.writeString(measure6);
+        dest.writeString(measure3);
+        dest.writeString(measure4);
+        dest.writeString(measure1);
+        dest.writeString(measure18);
+        dest.writeString(measure2);
+        dest.writeString(measure19);
+        dest.writeString(measure16);
+        dest.writeString(measure17);
+        dest.writeString(measure14);
+        dest.writeString(measure15);
     }
 }
