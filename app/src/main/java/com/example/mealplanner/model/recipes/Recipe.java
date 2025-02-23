@@ -50,6 +50,57 @@ public class Recipe implements Parcelable {
     @SerializedName("strIngredient19")
     private String ingredient19;
 
+    public Recipe(String ingredient10, String ingredient12, String ingredient11, String ingredient14, String category, String ingredient13, String ingredient16, String ingredient15, String ingredient18, String ingredient17, String cuisine, String ingredient19, String tags, @NonNull String id, String instructions, String ingredient1, String ingredient3, String ingredient2, String ingredient20, String ingredient5, String ingredient4, String ingredient7, String ingredient6, String ingredient9, String ingredient8, String thumbnail, String measure20, String youtubeURL, String title, String measure12, String measure13, String measure10, String measure11, String measure9, String measure7, String measure8, String measure5, String measure6, String measure3, String measure4, String measure1, String measure18, String measure2, String measure19, String measure16, String measure17, String measure14, String measure15) {
+        this.ingredient10 = ingredient10;
+        this.ingredient12 = ingredient12;
+        this.ingredient11 = ingredient11;
+        this.ingredient14 = ingredient14;
+        this.category = category;
+        this.ingredient13 = ingredient13;
+        this.ingredient16 = ingredient16;
+        this.ingredient15 = ingredient15;
+        this.ingredient18 = ingredient18;
+        this.ingredient17 = ingredient17;
+        this.cuisine = cuisine;
+        this.ingredient19 = ingredient19;
+        this.tags = tags;
+        this.id = id;
+        this.instructions = instructions;
+        this.ingredient1 = ingredient1;
+        this.ingredient3 = ingredient3;
+        this.ingredient2 = ingredient2;
+        this.ingredient20 = ingredient20;
+        this.ingredient5 = ingredient5;
+        this.ingredient4 = ingredient4;
+        this.ingredient7 = ingredient7;
+        this.ingredient6 = ingredient6;
+        this.ingredient9 = ingredient9;
+        this.ingredient8 = ingredient8;
+        this.thumbnail = thumbnail;
+        this.measure20 = measure20;
+        this.youtubeURL = youtubeURL;
+        this.title = title;
+        this.measure12 = measure12;
+        this.measure13 = measure13;
+        this.measure10 = measure10;
+        this.measure11 = measure11;
+        this.measure9 = measure9;
+        this.measure7 = measure7;
+        this.measure8 = measure8;
+        this.measure5 = measure5;
+        this.measure6 = measure6;
+        this.measure3 = measure3;
+        this.measure4 = measure4;
+        this.measure1 = measure1;
+        this.measure18 = measure18;
+        this.measure2 = measure2;
+        this.measure19 = measure19;
+        this.measure16 = measure16;
+        this.measure17 = measure17;
+        this.measure14 = measure14;
+        this.measure15 = measure15;
+    }
+
     @SerializedName("strTags")
     private String tags;
 

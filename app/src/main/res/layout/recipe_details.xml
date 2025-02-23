@@ -1,65 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:paddingBottom="32dp"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imv_recipe"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_gravity="top"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ramen" />
-
-    <ImageButton
-        android:id="@+id/imv_back_arrow"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="top|start"
-        android:layout_marginStart="27dp"
-        android:scaleType="centerCrop"
-        android:padding="12dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/icon_background"
-        android:src="@drawable/back_ic" />
-
-    <ImageButton
-        android:id="@+id/imv_add_favorite"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="centerCrop"
-        android:padding="12dp"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="27dp"
-        android:background="@drawable/icon_background"
-        android:src="@drawable/add_favorite"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/standard_bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="614dp"
-        android:layout_gravity="top"
-        android:background="@drawable/bottom_sheet"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
+        <ImageView
+            android:id="@+id/imv_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ramen"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_recipeTitle"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="260dp"
+            android:background="@drawable/card_background"
             android:fontFamily="@font/poppins_semi_bold"
             android:gravity="center"
             android:padding="13dp"
             android:text="Ramen"
             android:textColor="@color/black"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -88,102 +59,101 @@
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/tv_recipeTitle" />
 
-        <ImageView
-            android:id="@+id/card_cookingTime"
-            android:layout_width="160dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView_cookingTime"
+            android:layout_width="170dp"
             android:layout_height="73dp"
-            android:layout_marginTop="19dp"
-            android:background="@drawable/recipe_card_details"
-            app:layout_constraintEnd_toStartOf="@id/card_cuisine"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toStartOf="@id/cardView_cuisine"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription" />
+            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="38dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/cooking_time"
-            android:textColor="#96585653"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/cooking_time"
+                android:textColor="#96585653"
+                android:textSize="14sp" />
 
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/circle_background"
-            android:padding="12dp"
-            android:src="@drawable/hour_ic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription" />
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/circle_background"
+                android:padding="12dp"
+                android:src="@drawable/hour_ic" />
 
-        <TextView
-            android:id="@+id/tv_cookingTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="74dp"
-            android:layout_marginTop="58dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="35 mins"
-            android:textColor="@color/green"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription" />
+            <TextView
+                android:id="@+id/tv_cookingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="35 mins"
+                android:textColor="@color/green"
+                android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/card_cuisine"
-            android:layout_width="160dp"
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView_cuisine"
+            android:layout_width="170dp"
             android:layout_height="73dp"
-            android:layout_marginTop="19dp"
-            android:background="@drawable/recipe_card_details"
-            android:gravity="top|start"
-            android:paddingLeft="68dp"
-            android:paddingTop="16dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/card_cookingTime"
-            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription" />
+            app:layout_constraintStart_toEndOf="@id/cardView_cookingTime"
+            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
-            android:layout_marginRight="62dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/cuisine"
-            android:textColor="#96585653"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/cuisine"
+                android:textColor="#96585653"
+                android:textSize="14sp" />
 
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginRight="122dp"
-            android:background="@drawable/circle_background"
-            android:padding="12dp"
-            android:src="@drawable/dish"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription" />
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/circle_background"
+                android:padding="12dp"
+                android:src="@drawable/dish" />
 
-        <TextView
-            android:id="@+id/tv_cuisine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="58dp"
-            android:layout_marginRight="61dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Japanese"
-            android:textColor="@color/green"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription" />
+            <TextView
+                android:id="@+id/tv_cuisine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"
+                android:text="Japanese"
+                android:textColor="@color/green"
+                android:textSize="16sp" />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -199,14 +169,14 @@
 
 
         <TextView
-            android:id="@+id/tv_serveCount"
+            android:id="@+id/tv_serve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
             android:layout_marginTop="116dp"
             android:fontFamily="@font/poppins_medium"
             android:paddingHorizontal="14dp"
-            android:text="2 serves"
+            tools:text="2 serves"
             android:textColor="#96585653"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -239,12 +209,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="145dp"
+            android:orientation="vertical"
             android:paddingHorizontal="14dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/tv_recipeDescription"
             tools:listitem="@layout/recipe_ingredient_item" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingHorizontal="14dp"
+            android:paddingTop="8dp"
+            android:text="@string/directions"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerView_recipeIngredients" />
+
+        <TextView
+            android:id="@+id/tv_instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="58dp"
+            android:fontFamily="@font/poppins_light"
+            android:paddingHorizontal="14dp"
+            android:paddingTop="40dp"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView_recipeIngredients"
+            tools:text="Mix milk, oil and egg together. Sift flour, baking powder and salt into the mixture. Stir well until all ingredients are combined evenly.\r\n\r\nSpread some batter onto the pan. Spread a thin layer of batter to the side of the pan. Cover the pan for 30-60 seconds until small air bubbles appear.\r\n\r\nAdd butter, cream corn, crushed peanuts and sugar onto the pancake. Fold the pancake into half once the bottom surface is browned.\r\n\r\nCut into wedges and best eaten when it is warm." />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/recipeVideoView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="16dp"
+            app:autoPlay="false"
+            app:layout_constraintTop_toBottomOf="@id/tv_instructions" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.core.widget.NestedScrollView>

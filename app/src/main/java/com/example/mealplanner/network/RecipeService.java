@@ -23,11 +23,9 @@ public interface RecipeService {
     @GET("api/json/v1/1/list.php?i=list")
     Call<IngredientResponse> getIngredients();
 
-    @GET("api/json/v1/1/search.php?f=f")
+    @GET("api/json/v1/1/search.php?f=k")
     Call<RecipeResponse> getRecipes();
 
-//    @GET("images/ingredients/{ingredient}")
-//    Call<Integer> getIngredientThumbnail();
 }
 
 

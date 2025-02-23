@@ -66,6 +66,8 @@ dependencies {
     //Navigation
     implementation("androidx.navigation:navigation-fragment:2.5.3")
     implementation("androidx.navigation:navigation-ui:2.5.3")
+    // video player
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
