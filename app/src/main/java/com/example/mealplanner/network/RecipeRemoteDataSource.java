@@ -2,6 +2,7 @@ package com.example.mealplanner.network;
 
 import android.util.Log;
 
+import com.example.mealplanner.model.categories.Category;
 import com.example.mealplanner.model.categories.CategoryResponse;
 import com.example.mealplanner.model.countries.Country;
 import com.example.mealplanner.model.countries.CountryResponse;
@@ -35,7 +36,7 @@ public class RecipeRemoteDataSource {
         service = retrofit.create(RecipeService.class);
     }
 
-    public void getCategories(NetworkCallback networkCallback) {
+    public void getCategories(NetworkCallback<List<Category>> networkCallback) {
         Log.i(TAG, "getDataOverNetwork: ");
         Call<CategoryResponse> call = service.getCategories();
         call.enqueue(new Callback<CategoryResponse>() {
