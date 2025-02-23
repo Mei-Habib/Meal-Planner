@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/imv_recipe"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="300dp"
         android:layout_gravity="top"
         android:scaleType="centerCrop"
         android:src="@drawable/ramen" />
@@ -42,7 +42,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/standard_bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="640dp"
+        android:layout_height="614dp"
         android:layout_gravity="top"
         android:background="@drawable/bottom_sheet"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">

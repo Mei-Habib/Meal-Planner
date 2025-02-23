@@ -4,12 +4,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity(tableName = "recipe_table")
 public class Recipe implements Parcelable {
     @SerializedName("strIngredient10")
     private String ingredient10;
@@ -50,6 +53,8 @@ public class Recipe implements Parcelable {
     @SerializedName("strTags")
     private String tags;
 
+    @PrimaryKey
+    @NonNull
     @SerializedName("idMeal")
     private String id;
 
