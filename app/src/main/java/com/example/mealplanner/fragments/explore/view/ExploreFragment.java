@@ -1,6 +1,7 @@
 package com.example.mealplanner.fragments.explore.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import com.example.mealplanner.R;
 import com.example.mealplanner.fragments.explore.presenter.ExplorePresenter;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.categories.Category;
+import com.example.mealplanner.model.countries.Country;
 import com.example.mealplanner.model.database.RecipesLocalDataSource;
+import com.example.mealplanner.model.ingredients.Ingredient;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -58,9 +61,9 @@ public class ExploreFragment extends Fragment implements ExploreView {
                 if (chip.getText().toString().equals(CATEGORIES)) {
                     presenter.getCategories();
                 } else if (chip.getText().toString().equals(COUNTRIES)) {
-//                    recipeRemoteDataSource.getCountries();
+                    presenter.getCountries();
                 } else if (chip.getText().toString().equals(INGREDIENTS)) {
-//                    recipeRemoteDataSource.getIngredients();
+                    presenter.getIngredients();
                 }
             });
         }
@@ -72,7 +75,17 @@ public class ExploreFragment extends Fragment implements ExploreView {
     }
 
     @Override
-    public void showError(String message) {
+    public void showCountries(List<Country> countries) {
+        adapter.updateList(2, countries);
+    }
 
+    @Override
+    public void showIngredients(List<Ingredient> ingredients) {
+        adapter.updateList(3, ingredients);
+    }
+
+    @Override
+    public void showError(String message) {
+        Log.e(TAG, "showError: " + message);
     }
 }

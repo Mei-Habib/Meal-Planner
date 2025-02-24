@@ -25,7 +25,9 @@ import com.example.mealplanner.fragments.recipes.presenter.RandomRecipePresenter
 import com.example.mealplanner.fragments.recipes.presenter.RecipesPresenter;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.categories.Category;
+import com.example.mealplanner.model.countries.Country;
 import com.example.mealplanner.model.database.RecipesLocalDataSource;
+import com.example.mealplanner.model.ingredients.Ingredient;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 
@@ -113,6 +115,16 @@ public class RecipesFragment extends Fragment implements RecipesView, ExploreVie
     public void showCategories(List<Category> categories) {
         categoriesAdapter = new CategoriesAdapter(getContext(), categories);
         categoriesRecyclerView.setAdapter(categoriesAdapter);
+    }
+
+    @Override
+    public void showCountries(List<Country> countries) {
+
+    }
+
+    @Override
+    public void showIngredients(List<Ingredient> ingredients) {
+
     }
 
     @Override

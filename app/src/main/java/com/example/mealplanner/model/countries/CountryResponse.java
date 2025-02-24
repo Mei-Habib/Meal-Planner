@@ -13,11 +13,4 @@ public class CountryResponse {
         return countries;
     }
 
-    @Override
-    public String toString() {
-        return
-                "Response{" +
-                        "countries = '" + countries + '\'' +
-                        "}";
-    }
 }
