@@ -5,7 +5,6 @@ import android.util.Log;
 import com.example.mealplanner.model.categories.CategoryResponse;
 import com.example.mealplanner.model.countries.CountryResponse;
 import com.example.mealplanner.model.ingredients.IngredientResponse;
-import com.example.mealplanner.model.randommeal.RandomMealResponse;
 import com.example.mealplanner.model.recipes.RecipeResponse;
 
 
@@ -51,25 +50,9 @@ public class RecipeRemoteDataSource {
 //        });
     }
 
-    public Single<RandomMealResponse> getRandomMeal() {
+    public Single<RecipeResponse> getRandomRecipe() {
         Log.i(TAG, "getDataOverNetwork: ");
-        return service.getRandomMeal();
-//        call.enqueue(new Callback<RandomMealResponse>() {
-//            @Override
-//            public void onResponse(Call<RandomMealResponse> call, Response<RandomMealResponse> response) {
-//                Log.i(TAG, "onResponse: " + response.body().getMeal());
-//                if (response.body() != null) {
-//                    networkCallback.onSuccessResult(response.body().getMeal());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<RandomMealResponse> call, Throwable throwable) {
-//                Log.i(TAG, "onFailure: ");
-//                networkCallback.onFailureResult(throwable.getMessage().toString());
-//                throwable.printStackTrace();
-//            }
-//        });
+        return service.getRandomRecipe();
     }
 
     public Single<CountryResponse> getCountries() {

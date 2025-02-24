@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,25 +19,25 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
 import com.example.mealplanner.fragments.categories.view.CategoriesAdapter;
+import com.example.mealplanner.fragments.recipes.presenter.RandomRecipePresenter;
 import com.example.mealplanner.fragments.recipes.presenter.RecipesPresenter;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
-import com.example.mealplanner.network.NetworkCallback;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
-import com.example.mealplanner.model.categories.Category;
-import com.example.mealplanner.model.randommeal.RandomMeal;
 
 import java.util.List;
 
-public class RecipesFragment extends Fragment implements RecipesView, RecipesAdapter.OnRecipeClickListener {
+public class RecipesFragment extends Fragment implements RecipesView, RandomRecipeView, RecipesAdapter.OnRecipeClickListener {
 
     private static final String TAG = "RecipesFragment";
     private RecyclerView categoriesRecyclerView;
     private RecyclerView recipesRecyclerView;
     private RecipesAdapter recipesAdapter;
     private RecipesPresenter recipesPresenter;
+    private RandomRecipePresenter randomRecipePresenter;
     private CategoriesAdapter categoriesAdapter;
+    private CardView inspirationCardView;
     private ImageView randomRecipeImageVIew;
     private TextView randomRecipeTitle;
 //    private TextView randomRecipeDescription;
@@ -50,6 +51,7 @@ public class RecipesFragment extends Fragment implements RecipesView, RecipesAda
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        inspirationCardView = view.findViewById(R.id.card_inspiration);
         randomRecipeImageVIew = view.findViewById(R.id.imv_random_recipe);
         randomRecipeTitle = view.findViewById(R.id.tv_random_recipe_title);
 //        randomRecipeDescription = view.findViewById(R.id.tv_random_recipe_description);
@@ -60,7 +62,9 @@ public class RecipesFragment extends Fragment implements RecipesView, RecipesAda
         recipesPresenter = new RecipesPresenter(repository, this);
         recipesPresenter.getRecipes();
 
-//        recipeRemoteDataSource.getRandomMeal();
+        randomRecipePresenter = new RandomRecipePresenter(repository, this);
+        randomRecipePresenter.getRandomRecipe();
+
 
 //            @Override
 //            public void onSuccessResult(List<RandomMeal> randomMeal) {
@@ -109,6 +113,23 @@ public class RecipesFragment extends Fragment implements RecipesView, RecipesAda
     public void showRecipes(List<Recipe> recipes) {
         recipesAdapter = new RecipesAdapter(getContext(), this, recipes);
         recipesRecyclerView.setAdapter(recipesAdapter);
+    }
+
+    @Override
+    public void showRandomRecipe(List<Recipe> randomRecipe) {
+        Log.i(TAG, "showRandomRecipe: " + randomRecipe.get(0));
+        randomRecipeTitle.setText(randomRecipe.get(0).getTitle());
+//                randomRecipeDescription.setText(randomMeal.get(0).getTags());
+        Glide.with(getContext()).load(randomRecipe.get(0).getThumbnail())
+                .apply(new RequestOptions().override(200, 200))
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(randomRecipeImageVIew);
+
+        inspirationCardView.setOnClickListener(view->{
+            RecipesFragmentDirections.ActionRecipesFragmentToRecipeDetailsFragment action
+                    = RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(randomRecipe.get(0));
+            Navigation.findNavController(getView()).navigate(action);
+        });
     }
 
     @Override

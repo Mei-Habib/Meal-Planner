@@ -2,18 +2,12 @@ package com.example.mealplanner.model;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.mealplanner.model.categories.Category;
 import com.example.mealplanner.model.categories.CategoryResponse;
-import com.example.mealplanner.model.countries.Country;
 import com.example.mealplanner.model.countries.CountryResponse;
 import com.example.mealplanner.model.database.RecipesLocalDataSource;
-import com.example.mealplanner.model.ingredients.Ingredient;
 import com.example.mealplanner.model.ingredients.IngredientResponse;
-import com.example.mealplanner.model.randommeal.RandomMeal;
-import com.example.mealplanner.model.randommeal.RandomMealResponse;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.model.recipes.RecipeResponse;
-import com.example.mealplanner.network.NetworkCallback;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 
 import java.util.List;
@@ -69,8 +63,8 @@ public class RecipesRepository {
         return remoteDataSource.getIngredients();
     }
 
-    public Single<RandomMealResponse> getRandomMeal() {
-        return remoteDataSource.getRandomMeal();
+    public Single<RecipeResponse> getRandomRecipe() {
+        return remoteDataSource.getRandomRecipe();
     }
 
 
