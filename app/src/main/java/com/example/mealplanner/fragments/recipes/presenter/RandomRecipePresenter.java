@@ -2,7 +2,7 @@ package com.example.mealplanner.fragments.recipes.presenter;
 
 import android.annotation.SuppressLint;
 
-import com.example.mealplanner.fragments.recipes.view.RandomRecipeView;
+import com.example.mealplanner.fragments.recipes.view.RecipesView;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.recipes.RecipeResponse;
 
@@ -11,9 +11,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RandomRecipePresenter {
     private RecipesRepository repo;
-    private RandomRecipeView view;
+    private RecipesView view;
 
-    public RandomRecipePresenter(RecipesRepository repo, RandomRecipeView view) {
+    public RandomRecipePresenter(RecipesRepository repo, RecipesView view) {
         this.repo = repo;
         this.view = view;
     }

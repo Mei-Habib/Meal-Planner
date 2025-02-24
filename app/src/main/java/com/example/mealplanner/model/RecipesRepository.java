@@ -67,5 +67,8 @@ public class RecipesRepository {
         return remoteDataSource.getRandomRecipe();
     }
 
+    public Single<RecipeResponse> getRecipesByCategory(String category) {
+        return remoteDataSource.getRecipesByCategory(category);
+    }
 
 }

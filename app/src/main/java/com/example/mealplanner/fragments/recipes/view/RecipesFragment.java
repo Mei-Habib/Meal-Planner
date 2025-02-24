@@ -18,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
-import com.example.mealplanner.fragments.categories.presenter.CategoriesPresenter;
-import com.example.mealplanner.fragments.categories.view.CategoriesAdapter;
-import com.example.mealplanner.fragments.categories.view.CategoriesView;
+import com.example.mealplanner.fragments.categories.CategoriesAdapter;
+import com.example.mealplanner.fragments.explore.presenter.ExplorePresenter;
+import com.example.mealplanner.fragments.explore.view.ExploreView;
 import com.example.mealplanner.fragments.recipes.presenter.RandomRecipePresenter;
 import com.example.mealplanner.fragments.recipes.presenter.RecipesPresenter;
 import com.example.mealplanner.model.RecipesRepository;
@@ -31,7 +31,7 @@ import com.example.mealplanner.network.RecipeRemoteDataSource;
 
 import java.util.List;
 
-public class RecipesFragment extends Fragment implements RecipesView, RandomRecipeView, CategoriesView, RecipesAdapter.OnRecipeClickListener {
+public class RecipesFragment extends Fragment implements RecipesView, ExploreView, RecipesAdapter.OnRecipeClickListener {
 
     private static final String TAG = "RecipesFragment";
     private RecyclerView categoriesRecyclerView;
@@ -39,7 +39,7 @@ public class RecipesFragment extends Fragment implements RecipesView, RandomReci
     private RecipesAdapter recipesAdapter;
     private RecipesPresenter recipesPresenter;
     private RandomRecipePresenter randomRecipePresenter;
-    private CategoriesPresenter categoriesPresenter;
+    private ExplorePresenter explorePresenter;
     private CategoriesAdapter categoriesAdapter;
     private CardView inspirationCardView;
     private ImageView randomRecipeImageVIew;
@@ -69,8 +69,8 @@ public class RecipesFragment extends Fragment implements RecipesView, RandomReci
         randomRecipePresenter = new RandomRecipePresenter(repository, this);
         randomRecipePresenter.getRandomRecipe();
 
-        categoriesPresenter = new CategoriesPresenter(repository, this);
-        categoriesPresenter.getCategories();
+        explorePresenter = new ExplorePresenter(repository, this);
+        explorePresenter.getCategories();
     }
 
     @Override
@@ -102,6 +102,11 @@ public class RecipesFragment extends Fragment implements RecipesView, RandomReci
                     = RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(randomRecipe.get(0));
             Navigation.findNavController(getView()).navigate(action);
         });
+    }
+
+    @Override
+    public void showRecipesByCategory(List<Recipe> recipes) {
+        // recipes screen
     }
 
     @Override

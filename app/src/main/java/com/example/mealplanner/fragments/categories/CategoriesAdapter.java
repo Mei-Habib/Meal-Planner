@@ -1,4 +1,4 @@
-package com.example.mealplanner.fragments.categories.view;
+package com.example.mealplanner.fragments.categories;
 
 
 import android.content.Context;

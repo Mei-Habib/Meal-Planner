@@ -12,17 +12,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealplanner.R;
+import com.example.mealplanner.fragments.explore.presenter.ExplorePresenter;
+import com.example.mealplanner.model.RecipesRepository;
+import com.example.mealplanner.model.categories.Category;
+import com.example.mealplanner.model.database.RecipesLocalDataSource;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
-public class ExploreFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ExploreFragment extends Fragment implements ExploreView {
     private static final String TAG = "ExploreFragment";
     private SearchView searchView;
     private ChipGroup chipGroup;
     private RecyclerView recyclerView;
     private ExploreAdapter adapter;
-    private RecipeRemoteDataSource recipeRemoteDataSource;
+    private RecipesRepository repository;
+    private ExplorePresenter presenter;
     private static final String CATEGORIES = "Categories";
     private static final String COUNTRIES = "Countries";
     private static final String INGREDIENTS = "Ingredients";
@@ -39,33 +47,32 @@ public class ExploreFragment extends Fragment {
         searchView = view.findViewById(R.id.search_view);
         chipGroup = view.findViewById(R.id.chip_group);
         recyclerView = view.findViewById(R.id.recyclerView_explore);
-        recipeRemoteDataSource = new RecipeRemoteDataSource();
+        adapter = new ExploreAdapter(getContext(), 0, new ArrayList<>(0));
+        recyclerView.setAdapter(adapter);
+        repository = RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(getContext()));
+        presenter = new ExplorePresenter(repository, this);
 
         for (int i = 0; i < chipGroup.getChildCount(); i++) {
             Chip chip = (Chip) chipGroup.getChildAt(i);
             chip.setOnClickListener(v -> {
                 if (chip.getText().toString().equals(CATEGORIES)) {
-                    recipeRemoteDataSource.getCategories();
-//                        @Override
-//                        public void onSuccessResult(List<Category> categories) {
-//                            Log.i(TAG, "onSuccessResult: " + categories.get(1));
-//                            adapter = new ExploreAdapter(getContext(), 1, categories);
-//                            recyclerView.setAdapter(adapter);
-////                            adapter.updateList(categories);
-//                        }
-//
-//                        @Override
-//                        public void onFailureResult(String message) {
-//                            Log.e(TAG, "onFailureResult: " + message);
-//                        }
-//                    });
+                    presenter.getCategories();
                 } else if (chip.getText().toString().equals(COUNTRIES)) {
-                    recipeRemoteDataSource.getCountries();
+//                    recipeRemoteDataSource.getCountries();
                 } else if (chip.getText().toString().equals(INGREDIENTS)) {
-                    recipeRemoteDataSource.getIngredients();
+//                    recipeRemoteDataSource.getIngredients();
                 }
             });
         }
     }
 
+    @Override
+    public void showCategories(List<Category> categories) {
+        adapter.updateList(1, categories);
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
 }

@@ -7,5 +7,9 @@ import java.util.List;
 public interface RecipesView {
     void showRecipes(List<Recipe> recipes);
 
+    void showRandomRecipe(List<Recipe> randomRecipe);
+
+    void showRecipesByCategory(List<Recipe> recipes);
+
     void showError(String message);
 }

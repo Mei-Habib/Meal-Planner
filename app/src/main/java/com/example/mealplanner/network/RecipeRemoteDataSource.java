@@ -53,5 +53,9 @@ public class RecipeRemoteDataSource {
         return service.getIngredients();
     }
 
+    public Single<RecipeResponse> getRecipesByCategory(String category) {
+        Log.i(TAG, "getIngredients: ");
+        return service.getRecipesByCategory(category);
+    }
 
 }

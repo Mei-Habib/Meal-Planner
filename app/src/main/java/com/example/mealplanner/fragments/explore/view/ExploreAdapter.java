@@ -2,6 +2,7 @@ package com.example.mealplanner.fragments.explore.view;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,11 +87,12 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
         return list.size();
     }
 
-//    public void updateList(List<?> list) {
-//        this.list.clear();
-//        this.list.addAll(list);
-//        notifyDataSetChanged();
-//    }
+    public void updateList(int layout, List<?> list) {
+        Log.i("TAG", "updateList: " + list.get(0));
+        this.list = list;
+        this.layout = layout;
+        notifyDataSetChanged();
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView thumbnail;

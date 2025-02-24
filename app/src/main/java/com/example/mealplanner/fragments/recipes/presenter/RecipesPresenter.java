@@ -31,4 +31,16 @@ public class RecipesPresenter {
                         error -> view.showError(error.getMessage())
                 );
     }
+
+    @SuppressLint("CheckResult")
+    public void getRecipesByCategory(String category) {
+        repo.getRecipesByCategory(category)
+                .subscribeOn(Schedulers.io())
+                .map(RecipeResponse::getRecipes)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        list -> view.showRecipesByCategory(list),
+                        error -> view.showError(error.getMessage())
+                );
+    }
 }
