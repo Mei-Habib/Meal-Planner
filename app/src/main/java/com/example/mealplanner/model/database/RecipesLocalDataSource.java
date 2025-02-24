@@ -8,36 +8,27 @@ import com.example.mealplanner.model.recipes.Recipe;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Observable;
+
 public class RecipesLocalDataSource {
-    private RecipeDAO dao;
-    private LiveData<List<Recipe>> storedProducts;
+    private final RecipeDAO dao;
 
     public RecipesLocalDataSource(Context context) {
         RecipeDatabase db = RecipeDatabase.getInstance(context);
         dao = db.getRecipeDAO();
     }
 
-    public LiveData<List<Recipe>> getStoredProducts() {
-        storedProducts = dao.getRecipes();
-        return storedProducts;
+    public Observable<List<Recipe>> getStoredRecipes() {
+        return dao.getRecipes();
     }
 
-    public void addProduct(Recipe recipe) {
-        new Thread() {
-            @Override
-            public void run() {
-                dao.insertRecipe(recipe);
-            }
-        }.start();
+    public Completable insertRecipe(Recipe recipe) {
+        return dao.insertRecipe(recipe);
     }
 
-    public void removeProduct(Recipe recipe) {
-        new Thread() {
-            @Override
-            public void run() {
-                dao.deleteRecipe(recipe);
-            }
-        }.start();
+    public Completable deleteRecipe(Recipe recipe) {
+        return dao.deleteRecipe(recipe);
     }
 
 }

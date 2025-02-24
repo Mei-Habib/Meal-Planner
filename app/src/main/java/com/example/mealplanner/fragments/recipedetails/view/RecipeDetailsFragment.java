@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,21 +23,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
+import com.example.mealplanner.fragments.recipedetails.presenter.RecipeDetailsPresenter;
+import com.example.mealplanner.model.RecipesRepository;
+import com.example.mealplanner.model.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
+import com.example.mealplanner.network.RecipeRemoteDataSource;
 import com.google.android.material.bottomnavigation.BottomNavigationView;;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
-public class RecipeDetailsFragment extends Fragment {
+public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView {
     private static final String TAG = "RecipeDetailsFragment";
     private ImageView thumbnail;
     private TextView title;
+    ImageButton bookmark;
+    ImageButton calendar;
     private TextView cookingTime;
     private TextView cuisine;
     private TextView instructions;
@@ -44,9 +47,11 @@ public class RecipeDetailsFragment extends Fragment {
     private TextView serve;
     private ImageButton plus;
     private ImageButton minus;
+    private ImageButton back;
     private Recipe recipe;
     private RecyclerView recyclerView;
     private RecipeDetailsAdapter adapter;
+    private RecipeDetailsPresenter presenter;
     String videoId;
     int count = 1;
 
@@ -69,7 +74,11 @@ public class RecipeDetailsFragment extends Fragment {
         serve = view.findViewById(R.id.tv_serve);
         plus = view.findViewById(R.id.button_plus);
         minus = view.findViewById(R.id.button_minus);
+        bookmark = view.findViewById(R.id.button_add_favorite);
+        calendar = view.findViewById(R.id.button_calendar);
+        back = view.findViewById(R.id.button_back);
 
+        presenter = new RecipeDetailsPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(getContext())), this);
         initializeViews();
 
         // handle system back pressed
@@ -95,7 +104,7 @@ public class RecipeDetailsFragment extends Fragment {
 
         Glide.with(getContext()).load(recipe.getThumbnail())
                 .apply(new RequestOptions().override(200, 200))
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.placeholder)
                 .into(thumbnail);
 
         // video view
@@ -135,10 +144,30 @@ public class RecipeDetailsFragment extends Fragment {
 
             });
 
-            adapter = new RecipeDetailsAdapter(getContext(), count, recipe);
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(getView()).navigate(R.id.action_recipeDetailsFragment_to_recipesFragment);
+                }
+            });
+
+            bookmark.setOnClickListener(view -> {
+                presenter.insertRecipe(recipe);
+//                if (bookmark.getDrawable().getConstantState() == ContextCompat.getDrawable(getContext(), R.drawable.save_ic).getConstantState()) {
+//                    bookmark.setImageResource(R.drawable.save_filled_ic);
+//                    presenter.insertRecipe(recipe);
+//
+//                } else {
+//                    bookmark.setImageResource(R.drawable.save_ic);
+//                    presenter.deleteRecipe(recipe);
+//                }
+
+            });
+
+            adapter = new RecipeDetailsAdapter(getContext(), this, count, recipe);
             recyclerView.setAdapter(adapter);
             BottomNavigationView bottomNav = getActivity().findViewById(R.id.bottom_nav);
-            bottomNav.setVisibility(View.GONE);
+//            bottomNav.setVisibility(View.GONE);
         }
     }
 
@@ -155,5 +184,15 @@ public class RecipeDetailsFragment extends Fragment {
             }
         }
         return videoId;
+    }
+
+    @Override
+    public void showRecipe(Recipe recipe) {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
     }
 }

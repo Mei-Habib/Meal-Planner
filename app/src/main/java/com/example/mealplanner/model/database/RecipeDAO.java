@@ -13,14 +13,17 @@ import com.example.mealplanner.model.recipes.Recipe;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Observable;
+
 @Dao
 public interface RecipeDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertRecipe(Recipe recipe);
+    Completable insertRecipe(Recipe recipe);
 
     @Delete
-    public void deleteRecipe(Recipe recipe);
+     Completable deleteRecipe(Recipe recipe);
 
     @Query("SELECT * FROM recipe_table")
-    public LiveData<List<Recipe>> getRecipes();
+    Observable<List<Recipe>> getRecipes();
 }

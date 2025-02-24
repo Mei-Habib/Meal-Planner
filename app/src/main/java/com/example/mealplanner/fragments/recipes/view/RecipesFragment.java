@@ -96,7 +96,7 @@ public class RecipesFragment extends Fragment implements RecipesView, ExploreVie
 //                randomRecipeDescription.setText(randomMeal.get(0).getTags());
         Glide.with(getContext()).load(randomRecipe.get(0).getThumbnail())
                 .apply(new RequestOptions().override(200, 200))
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.placeholder)
                 .into(randomRecipeImageVIew);
 
         inspirationCardView.setOnClickListener(view -> {

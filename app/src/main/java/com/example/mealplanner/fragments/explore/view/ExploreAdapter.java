@@ -63,7 +63,7 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
             holder.title.setText(category.getTitle());
             Glide.with(context).load(category.getThumbnail())
                     .apply(new RequestOptions().override(200, 200))
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .placeholder(R.drawable.placeholder)
                     .into(holder.thumbnail);
         } else if (layout == COUNTRY_LAYOUT) {
             Country country = (Country) list.get(position);
@@ -76,7 +76,7 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
             holder.title.setText(ingredient.getIngredient());
             Glide.with(context).load(thumbnailUrl)
                     .apply(new RequestOptions().override(200, 200))
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .placeholder(R.drawable.placeholder)
                     .into(holder.thumbnail);
         }
 

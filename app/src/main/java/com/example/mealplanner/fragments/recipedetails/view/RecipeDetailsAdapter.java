@@ -1,10 +1,12 @@
 package com.example.mealplanner.fragments.recipedetails.view;
 
 import android.content.Context;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
+import com.example.mealplanner.fragments.recipedetails.presenter.RecipeDetailsPresenter;
+import com.example.mealplanner.model.RecipesRepository;
+import com.example.mealplanner.model.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.ingredients.Ingredient;
 import com.example.mealplanner.model.recipes.Recipe;
-
-import java.util.List;
+import com.example.mealplanner.network.RecipeRemoteDataSource;
 
 
 public class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdapter.ViewHolder> {
@@ -26,11 +30,15 @@ public class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdap
     private Recipe recipe;
     private int count;
     private String numberOnly;
+    private final RecipeDetailsPresenter presenter;
+    private RecipeDetailsView view;
 
-    public RecipeDetailsAdapter(Context context, int count, Recipe recipe) {
+    public RecipeDetailsAdapter(Context context, RecipeDetailsView view, int count, Recipe recipe) {
         this.context = context;
+        this.view = view;
         this.recipe = recipe;
         this.count = count;
+        presenter = new RecipeDetailsPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(context)), view);
     }
 
     @NonNull
@@ -53,8 +61,9 @@ public class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdap
             }
             Glide.with(context).load(thumbnailUrl)
                     .apply(new RequestOptions().override(200, 200))
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .placeholder(R.drawable.placeholder)
                     .into(holder.thumbnail);
+
         }
     }
 
@@ -73,13 +82,11 @@ public class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdap
         TextView title;
         TextView measure;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             thumbnail = itemView.findViewById(R.id.imv_recipeIngredient);
             title = itemView.findViewById(R.id.tv_recipeIngredientTitle);
             measure = itemView.findViewById(R.id.tv_recipeIngredientMeasure);
-
         }
     }
 

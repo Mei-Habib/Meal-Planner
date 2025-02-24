@@ -1,7 +1,5 @@
 package com.example.mealplanner.model;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.mealplanner.model.categories.CategoryResponse;
 import com.example.mealplanner.model.countries.CountryResponse;
 import com.example.mealplanner.model.database.RecipesLocalDataSource;
@@ -12,11 +10,13 @@ import com.example.mealplanner.network.RecipeRemoteDataSource;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 
 public class RecipesRepository {
-    private RecipeRemoteDataSource remoteDataSource;
-    private RecipesLocalDataSource localDataSource;
+    private final RecipeRemoteDataSource remoteDataSource;
+    private final RecipesLocalDataSource localDataSource;
     private static RecipesRepository productsRepository = null;
 
     private RecipesRepository(RecipeRemoteDataSource remoteDataSource, RecipesLocalDataSource localDataSource) {
@@ -34,16 +34,16 @@ public class RecipesRepository {
     }
 
     // local
-    public void addProduct(Recipe recipe) {
-        localDataSource.addProduct(recipe);
+    public Completable insertRecipe(Recipe recipe) {
+        return localDataSource.insertRecipe(recipe);
     }
 
-    public void removeProduct(Recipe recipe) {
-        localDataSource.removeProduct(recipe);
+    public Completable deleteRecipe(Recipe recipe) {
+        return localDataSource.deleteRecipe(recipe);
     }
 
-    public LiveData<List<Recipe>> getStoredProducts() {
-        return localDataSource.getStoredProducts();
+    public Observable<List<Recipe>> getStoredRecipes() {
+        return localDataSource.getStoredRecipes();
     }
 
     // remote

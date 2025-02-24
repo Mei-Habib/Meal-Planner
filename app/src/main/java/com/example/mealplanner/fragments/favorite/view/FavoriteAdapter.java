@@ -1,9 +1,11 @@
-package com.example.mealplanner.fragments.recipes.view;
+package com.example.mealplanner.fragments.favorite.view;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,45 +20,47 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
-
-public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder> {
 
     private Context context;
-    private List<Recipe> recipes;
+    private List<Recipe> favoriteRecipes;
     private OnRecipeClickListener onRecipeClickListener;
 
-    public RecipesAdapter(Context context, OnRecipeClickListener onRecipeClickListener, List<Recipe> recipes) {
+    public FavoriteAdapter(Context context, OnRecipeClickListener onRecipeClickListener, List<Recipe> favoriteRecipes) {
         this.context = context;
-        this.recipes = recipes;
+        this.favoriteRecipes = favoriteRecipes;
         this.onRecipeClickListener = onRecipeClickListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.recipe_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(itemView);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.favorite_item, parent, false);
+        FavoriteAdapter.ViewHolder viewHolder = new FavoriteAdapter.ViewHolder(itemView);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(recipes.get(position).getTitle());
-        holder.preparationTime.setText("---");
-        holder.category.setText(recipes.get(position).getCategory());
-        Glide.with(context).load(recipes.get(position).getThumbnail())
+        holder.title.setText(favoriteRecipes.get(position).getTitle());
+        Glide.with(context).load(favoriteRecipes.get(position).getThumbnail())
                 .apply(new RequestOptions().override(200, 200))
                 .placeholder(R.drawable.placeholder)
                 .into(holder.thumbnail);
 
         holder.cardView.setOnClickListener(view -> {
-            onRecipeClickListener.onRecipeClickListener(recipes.get(position));
+//            onRecipeClickListener.onRecipeClickListener(recipes.get(position));
         });
     }
 
     @Override
     public int getItemCount() {
-        return recipes.size();
+        return favoriteRecipes.size();
+    }
+
+    public void updateList(List<Recipe> favoriteRecipes) {
+        this.favoriteRecipes = favoriteRecipes;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,16 +68,14 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         MaterialCardView cardView;
         ImageView thumbnail;
         TextView title;
-        TextView preparationTime;
-        TextView category;
+        ImageButton delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.cardView_recipe);
-            thumbnail = itemView.findViewById(R.id.imv_recipe_thumbnail);
-            title = itemView.findViewById(R.id.tv_recipe_title);
-            preparationTime = itemView.findViewById(R.id.tv_prepTime);
-            category = itemView.findViewById(R.id.tv_recipe_category);
+            cardView = itemView.findViewById(R.id.cardView_favorite);
+            thumbnail = itemView.findViewById(R.id.imv_favorite);
+            title = itemView.findViewById(R.id.tv_favorite_title);
+            delete = itemView.findViewById(R.id.btn_favorite_delete);
         }
     }
 
