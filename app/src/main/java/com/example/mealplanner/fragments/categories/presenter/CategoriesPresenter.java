@@ -1,33 +1,33 @@
-package com.example.mealplanner.fragments.recipes.presenter;
+package com.example.mealplanner.fragments.categories.presenter;
 
 import android.annotation.SuppressLint;
 
+import com.example.mealplanner.fragments.categories.view.CategoriesView;
 import com.example.mealplanner.fragments.recipes.view.RecipesView;
 import com.example.mealplanner.model.RecipesRepository;
-import com.example.mealplanner.model.recipes.RecipeResponse;
+import com.example.mealplanner.model.categories.CategoryResponse;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class RecipesPresenter {
-
+public class CategoriesPresenter {
     private RecipesRepository repo;
-    private RecipesView view;
+    private CategoriesView view;
 
-    public RecipesPresenter(RecipesRepository repo, RecipesView view) {
+    public CategoriesPresenter(RecipesRepository repo, CategoriesView view) {
         this.repo = repo;
         this.view = view;
     }
 
     // Remote Data
     @SuppressLint("CheckResult")
-    public void getRecipes() {
-        repo.getRecipes()
+    public void getCategories() {
+        repo.getCategories()
                 .subscribeOn(Schedulers.io())
-                .map(RecipeResponse::getRecipes)
+                .map(CategoryResponse::getCategories)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        list -> view.showRecipes(list),
+                        list -> view.showCategories(list),
                         error -> view.showError(error.getMessage())
                 );
     }

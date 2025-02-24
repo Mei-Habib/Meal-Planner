@@ -18,17 +18,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
+import com.example.mealplanner.fragments.categories.presenter.CategoriesPresenter;
 import com.example.mealplanner.fragments.categories.view.CategoriesAdapter;
+import com.example.mealplanner.fragments.categories.view.CategoriesView;
 import com.example.mealplanner.fragments.recipes.presenter.RandomRecipePresenter;
 import com.example.mealplanner.fragments.recipes.presenter.RecipesPresenter;
 import com.example.mealplanner.model.RecipesRepository;
+import com.example.mealplanner.model.categories.Category;
 import com.example.mealplanner.model.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 
 import java.util.List;
 
-public class RecipesFragment extends Fragment implements RecipesView, RandomRecipeView, RecipesAdapter.OnRecipeClickListener {
+public class RecipesFragment extends Fragment implements RecipesView, RandomRecipeView, CategoriesView, RecipesAdapter.OnRecipeClickListener {
 
     private static final String TAG = "RecipesFragment";
     private RecyclerView categoriesRecyclerView;
@@ -36,6 +39,7 @@ public class RecipesFragment extends Fragment implements RecipesView, RandomReci
     private RecipesAdapter recipesAdapter;
     private RecipesPresenter recipesPresenter;
     private RandomRecipePresenter randomRecipePresenter;
+    private CategoriesPresenter categoriesPresenter;
     private CategoriesAdapter categoriesAdapter;
     private CardView inspirationCardView;
     private ImageView randomRecipeImageVIew;
@@ -65,40 +69,8 @@ public class RecipesFragment extends Fragment implements RecipesView, RandomReci
         randomRecipePresenter = new RandomRecipePresenter(repository, this);
         randomRecipePresenter.getRandomRecipe();
 
-
-//            @Override
-//            public void onSuccessResult(List<RandomMeal> randomMeal) {
-//                Log.i(TAG, "onSuccessResult: " + randomMeal.get(0));
-//                randomRecipeTitle.setText(randomMeal.get(0).getTitle());
-////                randomRecipeDescription.setText(randomMeal.get(0).getTags());
-//                Glide.with(getContext()).load(randomMeal.get(0).getThumbnail())
-//                        .apply(new RequestOptions().override(200, 200))
-//                        .placeholder(R.drawable.ic_launcher_background)
-//                        .into(randomRecipeImageVIew);
-//            }
-//
-//            @Override
-//            public void onFailureResult(String message) {
-//                Log.e(TAG, "onFailureResult: " + message);
-//            }
-//        });
-
-//        recipeRemoteDataSource.getCategories();
-
-//            @Override
-//            public void onSuccessResult(List<Category> categories) {
-//                Log.i(TAG, "onSuccessResult: " + categories.get(1));
-//                categoriesAdapter = new CategoriesAdapter(getContext(), categories);
-//                categoriesRecyclerView.setAdapter(categoriesAdapter);
-//            }
-//
-//            @Override
-//            public void onFailureResult(String message) {
-//
-//            }
-//        });
-
-
+        categoriesPresenter = new CategoriesPresenter(repository, this);
+        categoriesPresenter.getCategories();
     }
 
     @Override
@@ -125,11 +97,17 @@ public class RecipesFragment extends Fragment implements RecipesView, RandomReci
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(randomRecipeImageVIew);
 
-        inspirationCardView.setOnClickListener(view->{
+        inspirationCardView.setOnClickListener(view -> {
             RecipesFragmentDirections.ActionRecipesFragmentToRecipeDetailsFragment action
                     = RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(randomRecipe.get(0));
             Navigation.findNavController(getView()).navigate(action);
         });
+    }
+
+    @Override
+    public void showCategories(List<Category> categories) {
+        categoriesAdapter = new CategoriesAdapter(getContext(), categories);
+        categoriesRecyclerView.setAdapter(categoriesAdapter);
     }
 
     @Override
