@@ -23,7 +23,7 @@ import com.google.android.material.chip.ChipGroup;
 
 import java.util.List;
 
-public class ExploreFragment extends Fragment implements NetworkCallback {
+public class ExploreFragment extends Fragment {
 
     private static final String TAG = "ExploreFragment";
     private SearchView searchView;
@@ -53,62 +53,27 @@ public class ExploreFragment extends Fragment implements NetworkCallback {
             Chip chip = (Chip) chipGroup.getChildAt(i);
             chip.setOnClickListener(v -> {
                 if (chip.getText().toString().equals(CATEGORIES)) {
-                    recipeRemoteDataSource.getCategories(new NetworkCallback<List<Category>>() {
-                        @Override
-                        public void onSuccessResult(List<Category> categories) {
-                            Log.i(TAG, "onSuccessResult: " + categories.get(1));
-                            adapter = new ExploreAdapter(getContext(), 1, categories);
-                            recyclerView.setAdapter(adapter);
-//                            adapter.updateList(categories);
-                        }
-
-                        @Override
-                        public void onFailureResult(String message) {
-                            Log.e(TAG, "onFailureResult: " + message);
-                        }
-                    });
+                    recipeRemoteDataSource.getCategories();
+//                        @Override
+//                        public void onSuccessResult(List<Category> categories) {
+//                            Log.i(TAG, "onSuccessResult: " + categories.get(1));
+//                            adapter = new ExploreAdapter(getContext(), 1, categories);
+//                            recyclerView.setAdapter(adapter);
+////                            adapter.updateList(categories);
+//                        }
+//
+//                        @Override
+//                        public void onFailureResult(String message) {
+//                            Log.e(TAG, "onFailureResult: " + message);
+//                        }
+//                    });
                 } else if (chip.getText().toString().equals(COUNTRIES)) {
-                    recipeRemoteDataSource.getCountries(new NetworkCallback<List<Country>>() {
-                        @Override
-                        public void onSuccessResult(List<Country> countries) {
-                            Log.i(TAG, "onSuccessResult: " + countries.get(1));
-                            adapter = new ExploreAdapter(getContext(), 2, countries);
-                            recyclerView.setAdapter(adapter);
-//                            adapter.updateList(countries);
-                        }
-
-                        @Override
-                        public void onFailureResult(String message) {
-                            Log.e(TAG, "onFailureResult: " + message);
-                        }
-                    });
+                    recipeRemoteDataSource.getCountries();
                 } else if (chip.getText().toString().equals(INGREDIENTS)) {
-                    recipeRemoteDataSource.getIngredients(new NetworkCallback<List<Ingredient>>() {
-                        @Override
-                        public void onSuccessResult(List<Ingredient> ingredients) {
-                            Log.i(TAG, "onSuccessResult: " + ingredients.get(1));
-                            adapter = new ExploreAdapter(getContext(), 3, ingredients);
-                            recyclerView.setAdapter(adapter);
-//                            adapter.updateList(countries);
-                        }
-
-                        @Override
-                        public void onFailureResult(String message) {
-                            Log.e(TAG, "onFailureResult: " + message);
-                        }
-                    });
+                    recipeRemoteDataSource.getIngredients();
                 }
             });
         }
     }
 
-    @Override
-    public void onSuccessResult(Object result) {
-
-    }
-
-    @Override
-    public void onFailureResult(String message) {
-
-    }
 }

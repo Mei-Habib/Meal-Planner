@@ -146,7 +146,6 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/poppins_regular"
-                android:gravity="start"
                 android:text="Japanese"
                 android:textColor="@color/green"
                 android:textSize="16sp" />
