@@ -68,6 +68,10 @@ dependencies {
     implementation("io.reactivex.rxjava3:rxjava:3.1.6")
     implementation("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
     implementation("androidx.room:room-rxjava3:2.6.1")
+    //lottie
+    implementation("com.airbnb.android:lottie:6.3.0")
+    //Splash Screen
+    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
     //Navigation
     implementation("androidx.navigation:navigation-fragment:2.5.3")
     implementation("androidx.navigation:navigation-ui:2.5.3")

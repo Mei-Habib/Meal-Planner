@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         navController.addOnDestinationChangedListener((navController, navDestination, bundle) -> {
-            if (navDestination.getId() == R.id.registerFragment || navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.recipeDetailsFragment || navDestination.getId() == R.id.startFragment)
+            if (navDestination.getId() == R.id.registerFragment || navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.recipeDetailsFragment || navDestination.getId() == R.id.startFragment || navDestination.getId() == R.id.splashFragment)
                 bottomNavigationView.setVisibility(View.GONE);
             else
                 bottomNavigationView.setVisibility(View.VISIBLE);
