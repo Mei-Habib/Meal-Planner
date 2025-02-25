@@ -43,14 +43,11 @@ public class MainActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                if (navDestination.getId() == R.id.registerFragment || navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.recipeDetailsFragment)
-                    bottomNavigationView.setVisibility(View.GONE);
-                else
-                    bottomNavigationView.setVisibility(View.VISIBLE);
-            }
+        navController.addOnDestinationChangedListener((navController, navDestination, bundle) -> {
+            if (navDestination.getId() == R.id.registerFragment || navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.recipeDetailsFragment || navDestination.getId() == R.id.startFragment)
+                bottomNavigationView.setVisibility(View.GONE);
+            else
+                bottomNavigationView.setVisibility(View.VISIBLE);
         });
 
     }

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,9 +30,7 @@ public class LoginFragment extends Fragment {
     private TextInputEditText emailEditText;
     private TextInputEditText passwordEditText;
     private MaterialButton signinButton;
-    private TextView signupTextView;
-    private ImageView googleImageView;
-    private ImageView facebookImageView;
+    private ImageButton back;
     private String email;
     private String password;
     private FirebaseAuth mAuth;
@@ -50,8 +49,7 @@ public class LoginFragment extends Fragment {
         emailEditText = view.findViewById(R.id.email_signin);
         passwordEditText = view.findViewById(R.id.password_signin);
         signinButton = view.findViewById(R.id.button_signin);
-        signupTextView = view.findViewById(R.id.tv_signup_clickable);
-        googleImageView = view.findViewById(R.id.imv_google);
+        back = view.findViewById(R.id.button_backSignin);
         mAuth = FirebaseAuth.getInstance();
 
         signinButton.setOnClickListener(v -> {
@@ -86,6 +84,15 @@ public class LoginFragment extends Fragment {
                     });
         });
 
+        back.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_startFragment));
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null)
+            Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_recipesFragment);
     }
 }

@@ -47,18 +47,22 @@ dependencies {
     //BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     //Firebase Authentication library
-    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-auth:23.0.0")
     //Google Play services library
-    implementation("com.google.android.gms:play-services-auth:21.3.0")
+    implementation("com.google.android.gms:play-services-auth:21.1.1")
     //Credential Manager
-    implementation("androidx.credentials:credentials:1.5.0-rc01")
-    implementation("androidx.credentials:credentials-play-services-auth:1.5.0-rc01")
+//    implementation("androidx.credentials:credentials:1.5.0-rc01")
+//    implementation("androidx.credentials:credentials-play-services-auth:1.5.0-rc01")
+//    implementation("androidx.credentials:credentials:1.3.0")
+//    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+//    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
     implementation(libs.firebase.firestore)
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.google.code.gson:gson:2.12.1")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.room:room-runtime:2.6.1")
+    implementation(libs.googleid)
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
     implementation("io.reactivex.rxjava3:rxjava:3.1.6")
