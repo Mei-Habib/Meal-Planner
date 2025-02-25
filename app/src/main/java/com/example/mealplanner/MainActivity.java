@@ -2,14 +2,18 @@ package com.example.mealplanner;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -39,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+                if (navDestination.getId() == R.id.registerFragment || navDestination.getId() == R.id.loginFragment || navDestination.getId() == R.id.recipeDetailsFragment)
+                    bottomNavigationView.setVisibility(View.GONE);
+                else
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+            }
+        });
 
     }
 

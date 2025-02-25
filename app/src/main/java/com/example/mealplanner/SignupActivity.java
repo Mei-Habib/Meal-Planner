@@ -1,36 +1,36 @@
-package com.example.mealplanner;
-
-import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-public class SignupActivity extends AppCompatActivity {
-
-    private static final String TAG = "SignupActivity";
-    private TextInputEditText usernameEditText;
-    private TextInputEditText emailEditText;
-    private TextInputEditText passwordEditText;
-    private MaterialButton signupButton;
-    private TextView signinTextView;
-    private String username;
-    private String email;
-    private String password;
-    private FirebaseAuth mAuth;
-    private FirebaseUser user;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.forget_password);
-
+//package com.example.mealplanner;
+//
+//import android.os.Bundle;
+//import android.widget.TextView;
+//
+//import androidx.activity.EdgeToEdge;
+//import androidx.appcompat.app.AppCompatActivity;
+//
+//import com.google.android.material.button.MaterialButton;
+//import com.google.android.material.textfield.TextInputEditText;
+//import com.google.firebase.auth.FirebaseAuth;
+//import com.google.firebase.auth.FirebaseUser;
+//
+//public class SignupActivity extends AppCompatActivity {
+//
+//    private static final String TAG = "SignupActivity";
+//    private TextInputEditText usernameEditText;
+//    private TextInputEditText emailEditText;
+//    private TextInputEditText passwordEditText;
+//    private MaterialButton signupButton;
+//    private TextView signinTextView;
+//    private String username;
+//    private String email;
+//    private String password;
+//    private FirebaseAuth mAuth;
+//    private FirebaseUser user;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        EdgeToEdge.enable(this);
+//        setContentView(R.layout.forget_password);
+//
 //        usernameEditText = findViewById(R.id.username);
 //        emailEditText = findViewById(R.id.email_signup);
 //        passwordEditText = findViewById(R.id.password_signup);
@@ -87,5 +87,5 @@ public class SignupActivity extends AppCompatActivity {
 //            startActivity(intent);
 //            finish();
 //        }
-    }
-}
+//    }
+//}

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/recipesFragment">
+    app:startDestination="@id/registerFragment">
 
     <fragment
         android:id="@+id/recipesFragment"
@@ -47,5 +47,21 @@
         <argument
             android:name="recipe"
             app:argType="com.example.mealplanner.model.recipes.Recipe" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.mealplanner.fragments.register.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mealplanner.fragments.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_recipesFragment"
+            app:destination="@id/recipesFragment" />
     </fragment>
 </navigation>
