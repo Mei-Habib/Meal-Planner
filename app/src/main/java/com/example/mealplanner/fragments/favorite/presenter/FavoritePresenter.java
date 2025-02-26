@@ -18,6 +18,12 @@ public class FavoritePresenter {
         this.view = view;
     }
 
+    public void deleteRecipe(Recipe recipe) {
+        repo.deleteRecipe(recipe)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
+    }
 
     @SuppressLint("CheckResult")
     public void getStoredRecipes() {

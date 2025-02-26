@@ -32,6 +32,7 @@ public class StartFragment extends Fragment {
     private static final int REQUEST_CODE = 9001;
     private MaterialButton signupWithEmail;
     private MaterialButton signupWithGoogle;
+    private MaterialButton skip;
     private TextView signin;
     private FirebaseAuth auth;
     private GoogleSignInClient googleSignInClient;
@@ -48,6 +49,7 @@ public class StartFragment extends Fragment {
         signupWithEmail = view.findViewById(R.id.button_signupWithEmail);
         signupWithGoogle = view.findViewById(R.id.button_continueWithGoogle);
         signin = view.findViewById(R.id.tv_SigninClickable);
+        skip = view.findViewById(R.id.button_skip);
         auth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.WEB_ID))
@@ -62,6 +64,8 @@ public class StartFragment extends Fragment {
         });
 
         signin.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_startFragment_to_loginFragment));
+
+        skip.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_startFragment_to_recipesFragment));
     }
 
     private void signInWithGoogle() {

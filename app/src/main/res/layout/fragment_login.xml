@@ -15,7 +15,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/green_circle_background"
+        android:background="@drawable/black_circle_background"
         android:padding="12dp"
         android:scaleType="centerInside"
         android:src="@drawable/back_ic"

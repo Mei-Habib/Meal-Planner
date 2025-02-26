@@ -21,7 +21,11 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.mealplanner.fragments.favorite.view.FavoriteFragment"
-        android:label="FavoriteFragment" />
+        android:label="FavoriteFragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/plannerFragment"
         android:name="com.example.mealplanner.fragments.planner.view.PlannerFragment"

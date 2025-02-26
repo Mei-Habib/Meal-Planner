@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealplanner.R;
@@ -40,8 +41,8 @@ public class FavoriteFragment extends Fragment implements FavoriteView, Favorite
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.rv_favorite);
         presenter = new FavoritePresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(getContext())), this);
-        presenter.getStoredRecipes();
         adapter = new FavoriteAdapter(getContext(), this, new ArrayList<>());
+        presenter.getStoredRecipes();
         recyclerView.setAdapter(adapter);
     }
 
@@ -57,6 +58,12 @@ public class FavoriteFragment extends Fragment implements FavoriteView, Favorite
 
     @Override
     public void onRecipeClickListener(Recipe recipe) {
+        FavoriteFragmentDirections.ActionFavoriteFragmentToRecipeDetailsFragment action = FavoriteFragmentDirections.actionFavoriteFragmentToRecipeDetailsFragment(recipe);
+        Navigation.findNavController(requireView()).navigate(action);
+    }
 
+    @Override
+    public void onDeleteClickListener(Recipe recipe) {
+        presenter.deleteRecipe(recipe);
     }
 }

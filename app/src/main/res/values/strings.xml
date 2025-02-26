@@ -44,4 +44,5 @@
     <string name="sign_up_with_email">Sign up with email</string>
     <string name="continue_with_google">Continue with Google</string>
     <string name="WEB_ID">358638561965-nuh2sukj33083gn0oa3pegagjvf49npu.apps.googleusercontent.com</string>
+    <string name="log_out">Log out</string>
 </resources>

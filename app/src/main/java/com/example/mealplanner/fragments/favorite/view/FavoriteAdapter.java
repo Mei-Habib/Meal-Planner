@@ -48,9 +48,9 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
                 .placeholder(R.drawable.placeholder)
                 .into(holder.thumbnail);
 
-        holder.cardView.setOnClickListener(view -> {
-//            onRecipeClickListener.onRecipeClickListener(recipes.get(position));
-        });
+        holder.cardView.setOnClickListener(view -> onRecipeClickListener.onRecipeClickListener(favoriteRecipes.get(position)));
+
+        holder.delete.setOnClickListener(view -> onRecipeClickListener.onDeleteClickListener(favoriteRecipes.get(position)));
     }
 
     @Override
@@ -81,5 +81,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHo
 
     public interface OnRecipeClickListener {
         void onRecipeClickListener(Recipe recipe);
+
+        void onDeleteClickListener(Recipe recipe);
     }
 }
