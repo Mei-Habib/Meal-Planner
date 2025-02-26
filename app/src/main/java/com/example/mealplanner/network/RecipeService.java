@@ -8,6 +8,7 @@ import com.example.mealplanner.model.recipes.RecipeResponse;
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RecipeService {
     @GET("api/json/v1/1/categories.php")
@@ -25,8 +26,17 @@ public interface RecipeService {
     @GET("api/json/v1/1/search.php?f=k")
     Single<RecipeResponse> getRecipes();
 
-    @GET("api/json/v1/1/filter.php?c={category}")
-    Single<RecipeResponse> getRecipesByCategory(@Path("category") String category);
+    @GET("api/json/v1/1/filter.php?")
+    Single<RecipeResponse> getRecipesByCategory(@Query("c") String category);
+
+    @GET("api/json/v1/1/filter.php?")
+    Single<RecipeResponse> getRecipesByCountry(@Query("a") String country);
+
+    @GET("api/json/v1/1/filter.php?")
+    Single<RecipeResponse> getRecipesByIngredient(@Query("i") String ingredient);
+
+    @GET("api/json/v1/1/search.php?")
+    Single<RecipeResponse> searchRecipeByName(@Query("s") String name);
 
 }
 

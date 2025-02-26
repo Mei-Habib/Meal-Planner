@@ -2,6 +2,7 @@ package com.example.mealplanner.fragments.recipedetails.presenter;
 
 import com.example.mealplanner.fragments.favorite.view.FavoriteView;
 import com.example.mealplanner.fragments.recipedetails.view.RecipeDetailsView;
+import com.example.mealplanner.model.Plan;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.recipes.Recipe;
 
@@ -23,5 +24,9 @@ public class RecipeDetailsPresenter {
 
     public void deleteRecipe(Recipe recipe) {
         repo.deleteRecipe(recipe).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe();
+    }
+
+    public void insertPlan(Plan plan) {
+        repo.insertPlan(plan).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe();
     }
 }

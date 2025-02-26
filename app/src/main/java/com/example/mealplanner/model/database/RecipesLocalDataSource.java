@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.mealplanner.model.Plan;
 import com.example.mealplanner.model.recipes.Recipe;
 
 import java.util.List;
@@ -29,6 +30,18 @@ public class RecipesLocalDataSource {
 
     public Completable deleteRecipe(Recipe recipe) {
         return dao.deleteRecipe(recipe);
+    }
+
+    public Completable insertPlan(Plan plan) {
+        return dao.insertPlan(plan);
+    }
+
+    public Completable deletePlan(Plan plan){
+        return dao.deletePlan(plan);
+    }
+
+    public Observable<List<Plan>> getPlans(String date){
+        return dao.getPlans(date);
     }
 
 }

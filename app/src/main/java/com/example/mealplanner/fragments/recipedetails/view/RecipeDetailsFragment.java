@@ -1,5 +1,6 @@
 package com.example.mealplanner.fragments.recipedetails.view;
 
+import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
 import com.example.mealplanner.fragments.recipedetails.presenter.RecipeDetailsPresenter;
+import com.example.mealplanner.model.Plan;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
@@ -30,10 +32,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+
+import java.util.Date;
+import java.util.Locale;
 
 public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView {
     private static final String TAG = "RecipeDetailsFragment";
@@ -80,9 +86,12 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
         back = view.findViewById(R.id.button_back);
         BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_nav);
 
-        presenter = new RecipeDetailsPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(getContext())), this);
-        initializeViews();
 
+        presenter = new RecipeDetailsPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(getContext())), this);
+
+        initializeViews();
+        adapter = new RecipeDetailsAdapter(getContext(), this, count, recipe);
+        recyclerView.setAdapter(adapter);
         // handle system back pressed
         requireActivity().getOnBackPressedDispatcher().addCallback(
                 getViewLifecycleOwner(), new OnBackPressedCallback(true) {
@@ -104,10 +113,13 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
                 instructions.append("Step " + s);
         }
 
-        Glide.with(getContext()).load(recipe.getThumbnail())
-                .apply(new RequestOptions().override(200, 200))
-                .placeholder(R.drawable.placeholder)
-                .into(thumbnail);
+
+        if (isAdded() && getContext() != null) {
+            Glide.with(requireContext()).load(recipe.getThumbnail())
+                    .apply(new RequestOptions().override(200, 200))
+                    .placeholder(R.drawable.placeholder)
+                    .into(thumbnail);
+        }
 
         // video view
         String videoUrl = recipe.getYoutubeURL();
@@ -186,7 +198,8 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
                     }
 
                     @Override
-                    public void writeToParcel(android.os.Parcel dest, int flags) {}
+                    public void writeToParcel(android.os.Parcel dest, int flags) {
+                    }
                 };
 
                 CalendarConstraints constraints = new CalendarConstraints.Builder()
@@ -203,14 +216,19 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
                         .build();
 
                 picker.show(requireActivity().getSupportFragmentManager(), "tag");
+                picker.addOnPositiveButtonClickListener(selection -> {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd", Locale.getDefault());
+                    String formatedDate = simpleDateFormat.format(new Date(selection));
+                    Plan plan = new Plan(recipe.getTitle(), recipe.getThumbnail(), formatedDate);
+                    presenter.insertPlan(plan);
+                });
             });
 
             adapter = new RecipeDetailsAdapter(getContext(), this, count, recipe);
             recyclerView.setAdapter(adapter);
-
-//            bottomNav.setVisibility(View.GONE);
         }
     }
+
 
     private String extractVideoIdFromUrl(String youtubeUrl) {
         String videoId = null;

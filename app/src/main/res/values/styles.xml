@@ -19,6 +19,12 @@
 
     <style name="CustomDatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorPrimary">@color/green</item>
-        <item name="colorOnSurface">#000000</item>
+        <item name="colorOnSurface">@color/black</item>
+    </style>
+
+    <style name="CustomTextAppearance" parent="TextAppearance.MaterialCalendarWidget.Date">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+
     </style>
 </resources>

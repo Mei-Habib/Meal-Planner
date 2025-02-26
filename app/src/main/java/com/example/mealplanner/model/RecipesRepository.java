@@ -46,6 +46,18 @@ public class RecipesRepository {
         return localDataSource.getStoredRecipes();
     }
 
+    public Observable<List<Plan>> getPlans(String date) {
+        return localDataSource.getPlans(date);
+    }
+
+    public Completable insertPlan(Plan plan) {
+        return localDataSource.insertPlan(plan);
+    }
+
+    public Completable deletePlan(Plan plan) {
+        return localDataSource.deletePlan(plan);
+    }
+
     // remote
     public Single<RecipeResponse> getRecipes() {
         return remoteDataSource.getRecipes();
@@ -69,6 +81,10 @@ public class RecipesRepository {
 
     public Single<RecipeResponse> getRecipesByCategory(String category) {
         return remoteDataSource.getRecipesByCategory(category);
+    }
+
+    public Single<RecipeResponse> searchRecipeByName(String name) {
+        return remoteDataSource.searchRecipeByName(name);
     }
 
 }

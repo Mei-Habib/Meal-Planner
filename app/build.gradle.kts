@@ -77,6 +77,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.5.3")
     // video player
     implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.1")
+    // Calendar View
+    implementation("com.prolificinteractive:material-calendarview:1.4.3")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

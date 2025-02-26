@@ -58,4 +58,8 @@ public class RecipeRemoteDataSource {
         return service.getRecipesByCategory(category);
     }
 
+    public Single<RecipeResponse> searchRecipeByName(String name){
+        Log.i(TAG, "searchRecipeByName: ");
+        return service.searchRecipeByName(name);
+    }
 }

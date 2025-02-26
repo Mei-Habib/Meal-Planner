@@ -94,11 +94,12 @@ public class HomeFragment extends Fragment implements HomeView, ExploreView, Hom
         Log.i(TAG, "showRandomRecipe: " + randomRecipe.get(0));
         randomRecipeTitle.setText(randomRecipe.get(0).getTitle());
 //                randomRecipeDescription.setText(randomMeal.get(0).getTags());
-        Glide.with(getContext()).load(randomRecipe.get(0).getThumbnail())
-                .apply(new RequestOptions().override(200, 200))
-                .placeholder(R.drawable.placeholder)
-                .into(randomRecipeImageVIew);
-
+        if (isAdded() && getContext() != null) {
+            Glide.with(getContext()).load(randomRecipe.get(0).getThumbnail())
+                    .apply(new RequestOptions().override(200, 200))
+                    .placeholder(R.drawable.placeholder)
+                    .into(randomRecipeImageVIew);
+        }
         inspirationCardView.setOnClickListener(view -> {
             HomeFragmentDirections.ActionRecipesFragmentToRecipeDetailsFragment action
                     = HomeFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(randomRecipe.get(0));
