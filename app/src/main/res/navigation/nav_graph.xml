@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/recipesFragment"
-        android:name="com.example.mealplanner.fragments.recipes.view.RecipesFragment"
+        android:name="com.example.mealplanner.fragments.home.view.HomeFragment"
         android:label="RecipesFragment">
         <action
             android:id="@+id/action_recipesFragment_to_recipeDetailsFragment"

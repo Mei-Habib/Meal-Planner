@@ -1,20 +1,20 @@
-package com.example.mealplanner.fragments.recipes.presenter;
+package com.example.mealplanner.fragments.home.presenter;
 
 import android.annotation.SuppressLint;
 
-import com.example.mealplanner.fragments.recipes.view.RecipesView;
+import com.example.mealplanner.fragments.home.view.HomeView;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.recipes.RecipeResponse;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class RecipesPresenter {
+public class HomePresenter {
 
     private RecipesRepository repo;
-    private RecipesView view;
+    private HomeView view;
 
-    public RecipesPresenter(RecipesRepository repo, RecipesView view) {
+    public HomePresenter(RecipesRepository repo, HomeView view) {
         this.repo = repo;
         this.view = view;
     }

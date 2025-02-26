@@ -1,7 +1,7 @@
 package com.example.mealplanner.fragments.recipedetails.view;
 
-import android.media.MediaPlayer;
-import android.net.Uri;
+import android.icu.util.Calendar;
+import android.icu.util.TimeZone;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +27,9 @@ import com.example.mealplanner.model.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 import com.google.android.material.bottomnavigation.BottomNavigationView;;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -39,7 +40,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
     private ImageView thumbnail;
     private TextView title;
     ImageButton bookmark;
-    ImageButton calendar;
+    ImageButton datePicker;
     private TextView cookingTime;
     private TextView cuisine;
     private TextView instructions;
@@ -75,8 +76,9 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
         plus = view.findViewById(R.id.button_plus);
         minus = view.findViewById(R.id.button_minus);
         bookmark = view.findViewById(R.id.button_add_favorite);
-        calendar = view.findViewById(R.id.button_calendar);
+        datePicker = view.findViewById(R.id.button_calendar);
         back = view.findViewById(R.id.button_back);
+        BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_nav);
 
         presenter = new RecipeDetailsPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(getContext())), this);
         initializeViews();
@@ -164,9 +166,48 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
 
             });
 
+
+            datePicker.setOnClickListener(v -> {
+                long today = MaterialDatePicker.todayInUtcMilliseconds();
+                Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+                calendar.setTimeInMillis(today);
+                calendar.add(Calendar.DAY_OF_MONTH, 7);
+                long endDate = calendar.getTimeInMillis();
+                // validate date selection
+                CalendarConstraints.DateValidator validator = new CalendarConstraints.DateValidator() {
+                    @Override
+                    public boolean isValid(long date) {
+                        return date >= today && date <= endDate;
+                    }
+
+                    @Override
+                    public int describeContents() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void writeToParcel(android.os.Parcel dest, int flags) {}
+                };
+
+                CalendarConstraints constraints = new CalendarConstraints.Builder()
+                        .setStart(today)
+                        .setEnd(endDate)
+                        .setValidator(validator)
+                        .build();
+
+                MaterialDatePicker<Long> picker = MaterialDatePicker.Builder.datePicker()
+                        .setTitleText("Select date")
+                        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                        .setCalendarConstraints(constraints)
+                        .setTheme(R.style.CustomDatePicker)
+                        .build();
+
+                picker.show(requireActivity().getSupportFragmentManager(), "tag");
+            });
+
             adapter = new RecipeDetailsAdapter(getContext(), this, count, recipe);
             recyclerView.setAdapter(adapter);
-            BottomNavigationView bottomNav = getActivity().findViewById(R.id.bottom_nav);
+
 //            bottomNav.setVisibility(View.GONE);
         }
     }

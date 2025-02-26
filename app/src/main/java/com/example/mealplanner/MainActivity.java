@@ -1,29 +1,15 @@
 package com.example.mealplanner;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.mealplanner.fragments.recipedetails.view.RecipeDetailsFragment;
-import com.example.mealplanner.fragments.recipes.view.RecipesAdapter;
-import com.example.mealplanner.model.recipes.Recipe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.shape.CornerFamily;
-import com.google.android.material.shape.MaterialShapeDrawable;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,10 +1,10 @@
-package com.example.mealplanner.fragments.recipes.view;
+package com.example.mealplanner.fragments.home.view;
 
 import com.example.mealplanner.model.recipes.Recipe;
 
 import java.util.List;
 
-public interface RecipesView {
+public interface HomeView {
     void showRecipes(List<Recipe> recipes);
 
     void showRandomRecipe(List<Recipe> randomRecipe);

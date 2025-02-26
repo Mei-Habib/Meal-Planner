@@ -16,4 +16,9 @@
         <item name="android:textSize">14dp</item>
         <item name="fontFamily">@font/poppins_regular</item>
     </style>
+
+    <style name="CustomDatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorOnSurface">#000000</item>
+    </style>
 </resources>

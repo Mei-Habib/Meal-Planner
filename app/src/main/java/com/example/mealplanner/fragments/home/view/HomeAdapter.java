@@ -1,4 +1,4 @@
-package com.example.mealplanner.fragments.recipes.view;
+package com.example.mealplanner.fragments.home.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,13 +19,13 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.List;
 
 
-public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private Context context;
     private List<Recipe> recipes;
     private OnRecipeClickListener onRecipeClickListener;
 
-    public RecipesAdapter(Context context, OnRecipeClickListener onRecipeClickListener, List<Recipe> recipes) {
+    public HomeAdapter(Context context, OnRecipeClickListener onRecipeClickListener, List<Recipe> recipes) {
         this.context = context;
         this.recipes = recipes;
         this.onRecipeClickListener = onRecipeClickListener;

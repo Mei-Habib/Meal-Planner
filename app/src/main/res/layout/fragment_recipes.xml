@@ -1,170 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/white"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_bold"
+        android:paddingLeft="20dp"
+        android:text="@string/recipes"
+        android:textColor="@color/green"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipesCardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/moon_ic"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="22dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/moon_ic" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="59dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/poppins_light"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Good Evening" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:fontFamily="@font/poppins_medium"
-            android:paddingLeft="20dp"
-            android:text="@string/today_s_inspiration"
-            android:textSize="24sp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_inspiration"
-            android:layout_width="match_parent"
-            android:layout_height="151dp"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="130dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="4dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imv_random_recipe"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="end"
-                android:foreground="#40000000"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/chicken" />
-
-            <TextView
-                android:id="@+id/tv_random_recipe_title"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="4dp"
-                android:fontFamily="@font/poppins_semi_bold"
-                android:gravity="start"
-                android:maxLines="2"
-                android:textColor="#6A543B"
-                android:textSize="20sp"
-                tools:text="Chicken Ranch Wrap" />
-
-            <TextView
-                android:id="@+id/tv_random_recipe_description"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/poppins_light"
-                android:gravity="start"
-                android:maxLines="3"
-                android:text="Lorem ipsum dolor sit amet\nconsectetur."
-                android:textColor="#6A543B"
-                android:textSize="13sp" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/poppins_medium"
-            android:paddingLeft="20dp"
-            android:text="@string/categories"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_inspiration" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="39dp"
-            android:layout_marginEnd="12dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/see_all"
-            android:textColor="@color/green"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_inspiration" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="134dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/recipe_item"
+        app:spanCount="2" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_categories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="77dp"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/card_inspiration"
-            tools:listitem="@layout/category_item" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/poppins_medium"
-            android:paddingLeft="20dp"
-            android:text="@string/recipes"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_categories" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="39dp"
-            android:layout_marginEnd="12dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/see_all"
-            android:textColor="@color/green"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_categories" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_recipes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="77dp"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/rv_categories"
-            tools:listitem="@layout/recipe_item" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
