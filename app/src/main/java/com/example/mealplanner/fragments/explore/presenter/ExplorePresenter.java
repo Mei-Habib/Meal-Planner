@@ -21,6 +21,8 @@ public class ExplorePresenter {
         this.view = view;
     }
 
+
+
     @SuppressLint("CheckResult")
     public void getCategories() {
         repo.getCategories()

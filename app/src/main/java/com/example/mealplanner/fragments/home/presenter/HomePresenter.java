@@ -34,7 +34,7 @@ public class HomePresenter {
 
     @SuppressLint("CheckResult")
     public void getRecipesByCategory(String category) {
-        repo.getRecipesByCategory(category)
+        repo.searchRecipesByCategory(category)
                 .subscribeOn(Schedulers.io())
                 .map(RecipeResponse::getRecipes)
                 .observeOn(AndroidSchedulers.mainThread())

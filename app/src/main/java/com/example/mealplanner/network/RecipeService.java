@@ -27,13 +27,13 @@ public interface RecipeService {
     Single<RecipeResponse> getRecipes();
 
     @GET("api/json/v1/1/filter.php?")
-    Single<RecipeResponse> getRecipesByCategory(@Query("c") String category);
+    Single<RecipeResponse> searchRecipesByCategory(@Query("c") String category);
 
     @GET("api/json/v1/1/filter.php?")
-    Single<RecipeResponse> getRecipesByCountry(@Query("a") String country);
+    Single<RecipeResponse> searchRecipesByCountry(@Query("a") String country);
 
     @GET("api/json/v1/1/filter.php?")
-    Single<RecipeResponse> getRecipesByIngredient(@Query("i") String ingredient);
+    Single<RecipeResponse> searchRecipesByIngredient(@Query("i") String ingredient);
 
     @GET("api/json/v1/1/search.php?")
     Single<RecipeResponse> searchRecipeByName(@Query("s") String name);

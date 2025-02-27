@@ -53,12 +53,22 @@ public class RecipeRemoteDataSource {
         return service.getIngredients();
     }
 
-    public Single<RecipeResponse> getRecipesByCategory(String category) {
+    public Single<RecipeResponse> searchRecipesByCategory(String category) {
         Log.i(TAG, "getIngredients: ");
-        return service.getRecipesByCategory(category);
+        return service.searchRecipesByCategory(category);
     }
 
-    public Single<RecipeResponse> searchRecipeByName(String name){
+    public Single<RecipeResponse> searchRecipesByCountry(String country) {
+        Log.i(TAG, "getIngredients: ");
+        return service.searchRecipesByCountry(country);
+    }
+
+    public Single<RecipeResponse> searchRecipesByIngredient(String ingredient) {
+        Log.i(TAG, "getIngredients: ");
+        return service.searchRecipesByIngredient(ingredient);
+    }
+
+    public Single<RecipeResponse> searchRecipeByName(String name) {
         Log.i(TAG, "searchRecipeByName: ");
         return service.searchRecipeByName(name);
     }

@@ -79,8 +79,16 @@ public class RecipesRepository {
         return remoteDataSource.getRandomRecipe();
     }
 
-    public Single<RecipeResponse> getRecipesByCategory(String category) {
-        return remoteDataSource.getRecipesByCategory(category);
+    public Single<RecipeResponse> searchRecipesByCategory(String category) {
+        return remoteDataSource.searchRecipesByCategory(category);
+    }
+
+    public Single<RecipeResponse> searchRecipesByCountry(String country) {
+        return remoteDataSource.searchRecipesByCountry(country);
+    }
+
+    public Single<RecipeResponse> searchRecipesByIngredient(String ingredient) {
+        return remoteDataSource.searchRecipesByIngredient(ingredient);
     }
 
     public Single<RecipeResponse> searchRecipeByName(String name) {

@@ -6,10 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -25,15 +27,17 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
 
     private Context context;
     private List list;
-    private static final int CATEGORY_LAYOUT = 1;
-    private static final int COUNTRY_LAYOUT = 2;
-    private static final int INGREDIENT_LAYOUT = 3;
+    public static final int CATEGORY_LAYOUT = 1;
+    public static final int COUNTRY_LAYOUT = 2;
+    public static final int INGREDIENT_LAYOUT = 3;
     private int layout;
+    private OnItemClickListener listener;
 
-    public ExploreAdapter(Context context, int layout, List<?> list) {
+    public ExploreAdapter(Context context, OnItemClickListener listener, int layout, List<?> list) {
         this.context = context;
         this.list = list;
         this.layout = layout;
+        this.listener = listener;
     }
 
     @NonNull
@@ -65,10 +69,14 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
                     .apply(new RequestOptions().override(200, 200))
                     .placeholder(R.drawable.placeholder)
                     .into(holder.thumbnail);
+            holder.thumbnail.setOnClickListener(v -> listener.onItemClick(category.getTitle(), CATEGORY_LAYOUT));
+
         } else if (layout == COUNTRY_LAYOUT) {
             Country country = (Country) list.get(position);
             holder.title.setText(country.getCountry());
             holder.thumbnail.setImageResource(country.getThumbnail().get(position));
+            holder.thumbnail.setOnClickListener(v -> listener.onItemClick(country.getCountry(), COUNTRY_LAYOUT));
+
         } else if (layout == INGREDIENT_LAYOUT) {
             String thumbnailUrl;
             Ingredient ingredient = (Ingredient) list.get(position);
@@ -78,6 +86,7 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
                     .apply(new RequestOptions().override(200, 200))
                     .placeholder(R.drawable.placeholder)
                     .into(holder.thumbnail);
+            holder.thumbnail.setOnClickListener(v -> listener.onItemClick(ingredient.getIngredient(), INGREDIENT_LAYOUT));
         }
 
     }
@@ -98,11 +107,14 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
         ImageView thumbnail;
         TextView title;
 
+        CardView cardView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             if (layout == CATEGORY_LAYOUT) {
                 thumbnail = itemView.findViewById(R.id.imv_category);
                 title = itemView.findViewById(R.id.tv_category);
+                cardView = itemView.findViewById(R.id.cardViewCategory);
             } else if (layout == COUNTRY_LAYOUT) {
                 thumbnail = itemView.findViewById(R.id.imv_country);
                 title = itemView.findViewById(R.id.tv_country);
@@ -111,6 +123,10 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
                 thumbnail = itemView.findViewById(R.id.imv_ingredient_thumbnail);
             }
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String title, int searchBy);
     }
 }
 

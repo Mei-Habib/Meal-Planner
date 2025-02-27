@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group>
         <item
-            android:id="@+id/recipesFragment"
+            android:id="@+id/homeFragment"
             android:icon="@drawable/recipe_ic"
             android:title="@string/recipes" />
 
