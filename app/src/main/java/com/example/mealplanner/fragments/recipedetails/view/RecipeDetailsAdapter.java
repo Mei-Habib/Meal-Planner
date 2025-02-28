@@ -1,12 +1,9 @@
 package com.example.mealplanner.fragments.recipedetails.view;
 
 import android.content.Context;
-import android.media.Image;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,8 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
 import com.example.mealplanner.fragments.recipedetails.presenter.RecipeDetailsPresenter;
 import com.example.mealplanner.model.RecipesRepository;
-import com.example.mealplanner.model.database.RecipesLocalDataSource;
-import com.example.mealplanner.model.ingredients.Ingredient;
+import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 

@@ -1,4 +1,4 @@
-package com.example.mealplanner.model.database;
+package com.example.mealplanner.data.local.room.database;
 
 import android.content.Context;
 

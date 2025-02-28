@@ -4,28 +4,28 @@
     <group>
         <item
             android:id="@+id/homeFragment"
-            android:icon="@drawable/recipe_ic"
-            android:title="@string/recipes" />
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
 
         <item
             android:id="@+id/exploreFragment"
-            android:icon="@drawable/explore_ic"
-            android:title="@string/explore" />
+            android:icon="@drawable/ic_search"
+            android:title="Search" />
 
         <item
             android:id="@+id/favoriteFragment"
-            android:icon="@drawable/favorite_ic"
-            android:title="@string/favorite" />
+            android:icon="@drawable/ic_bookmark"
+            android:title="Favorite" />
 
         <item
             android:id="@+id/plannerFragment"
-            android:icon="@drawable/calendar_ic"
-            android:title="@string/planner" />
+            android:icon="@drawable/ic_calendar"
+            android:title="Plans" />
 
         <item
             android:id="@+id/profileFragment"
-            android:icon="@drawable/profile_ic"
-            android:title="@string/profile" />
+            android:icon="@drawable/ic_user"
+            android:title="Profile" />
 
     </group>
 </menu>

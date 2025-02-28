@@ -1,8 +1,6 @@
-package com.example.mealplanner.model.database;
+package com.example.mealplanner.data.local.room.database;
 
 import android.content.Context;
-
-import androidx.lifecycle.LiveData;
 
 import com.example.mealplanner.model.Plan;
 import com.example.mealplanner.model.recipes.Recipe;

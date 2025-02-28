@@ -9,20 +9,16 @@ import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.NavUtils;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealplanner.R;
 import com.example.mealplanner.fragments.explore.presenter.ExplorePresenter;
-import com.example.mealplanner.fragments.recipes.view.RecipesFragment;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.categories.Category;
 import com.example.mealplanner.model.countries.Country;
-import com.example.mealplanner.model.database.RecipesLocalDataSource;
+import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.ingredients.Ingredient;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 import com.google.android.material.chip.Chip;

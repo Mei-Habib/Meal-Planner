@@ -26,7 +26,7 @@ import com.example.mealplanner.fragments.home.presenter.HomePresenter;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.categories.Category;
 import com.example.mealplanner.model.countries.Country;
-import com.example.mealplanner.model.database.RecipesLocalDataSource;
+import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.ingredients.Ingredient;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.network.RecipeRemoteDataSource;

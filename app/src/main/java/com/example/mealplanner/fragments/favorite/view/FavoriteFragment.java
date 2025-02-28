@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mealplanner.R;
 import com.example.mealplanner.fragments.favorite.presenter.FavoritePresenter;
 import com.example.mealplanner.model.RecipesRepository;
-import com.example.mealplanner.model.database.RecipesLocalDataSource;
+import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 

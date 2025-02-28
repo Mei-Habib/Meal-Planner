@@ -1,12 +1,10 @@
 package com.example.mealplanner.fragments.planner.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +16,7 @@ import com.example.mealplanner.R;
 import com.example.mealplanner.fragments.planner.presenter.PlannerPresenter;
 import com.example.mealplanner.model.Plan;
 import com.example.mealplanner.model.RecipesRepository;
-import com.example.mealplanner.model.database.RecipesLocalDataSource;
+import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 import com.prolificinteractive.materialcalendarview.CalendarDay;

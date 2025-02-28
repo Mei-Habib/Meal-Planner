@@ -22,19 +22,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/guideline" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_skip"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="32dp"
-        android:text="Skip"
-        android:textSize="14dp"
-        app:cornerRadius="30dp"
-        android:fontFamily="@font/poppins_medium"
-        android:backgroundTint="#70000000"
+        android:id="@+id/button_skip"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/poppins"
+        android:text="Skip"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="3dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/skip_background"/>
 
 
     <androidx.constraintlayout.widget.Guideline

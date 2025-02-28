@@ -2,7 +2,7 @@ package com.example.mealplanner.model;
 
 import com.example.mealplanner.model.categories.CategoryResponse;
 import com.example.mealplanner.model.countries.CountryResponse;
-import com.example.mealplanner.model.database.RecipesLocalDataSource;
+import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.ingredients.IngredientResponse;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.example.mealplanner.model.recipes.RecipeResponse;
