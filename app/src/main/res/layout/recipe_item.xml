@@ -12,21 +12,21 @@
         android:id="@+id/cardViewRecipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="8sp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:strokeColor="@color/grey"
         app:strokeWidth="0sp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="140sp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:background="@color/green"
-            android:paddingBottom="5sp">
+            android:paddingBottom="5dp">
 
             <ImageView
                 android:id="@+id/recipeThumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="150sp"
+                android:layout_height="150dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ramen"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -34,14 +34,14 @@
             <TextView
                 android:id="@+id/recipeTitle"
                 android:layout_width="match_parent"
-                android:layout_height="30sp"
-                android:layout_marginHorizontal="5sp"
-                android:layout_marginTop="5sp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins"
                 android:gravity="center"
                 android:maxLines="2"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintTop_toBottomOf="@+id/recipeThumbnail"
                 tools:text="Ramen" />
 

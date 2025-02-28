@@ -27,15 +27,20 @@ import com.example.mealplanner.network.RecipeRemoteDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 public class RecipesFragment extends Fragment implements RecipesView {
 
     private static final String TAG = "RecipesFragment";
     private SearchView searchView;
     private RecyclerView recyclerView;
-    private TextView searchByItem;
     private RecipesAdapter adapter;
     private RecipesPresenter presenter;
+    private Disposable searchDisposable;
 
 
     @Nullable
@@ -52,9 +57,9 @@ public class RecipesFragment extends Fragment implements RecipesView {
         adapter = new RecipesAdapter(requireContext(), new ArrayList<>());
         recyclerView.setAdapter(adapter);
         presenter = new RecipesPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(requireContext())), this);
-        String title = RecipesFragmentArgs.fromBundle(getArguments()).getTitle();
+        String key = RecipesFragmentArgs.fromBundle(getArguments()).getKey();
         int searchBy = RecipesFragmentArgs.fromBundle(getArguments()).getSearchBy();
-        presenter.getRecipes(title, searchBy);
+        presenter.getRecipes("", key, searchBy);
 
         // handle system back pressed
         requireActivity().getOnBackPressedDispatcher().addCallback(
@@ -66,10 +71,37 @@ public class RecipesFragment extends Fragment implements RecipesView {
                 }
         );
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (searchDisposable != null) {
+                    searchDisposable.dispose();
+                }
+
+                searchDisposable = Observable.just(newText)
+                        .debounce(300, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(query -> {
+                            presenter.getRecipes(query, key, searchBy);
+                        });
+
+                return false;
+            }
+        });
+
     }
 
     @Override
     public void showRecipes(List<Recipe> recipes) {
+        if (recipes == null || recipes.isEmpty()) {
+            this.showError("No recipes found");
+            return;
+        }
         adapter.updateList(recipes);
     }
 

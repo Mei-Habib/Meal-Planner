@@ -8,6 +8,8 @@ import com.example.mealplanner.model.categories.CategoryResponse;
 import com.example.mealplanner.model.countries.CountryResponse;
 import com.example.mealplanner.model.ingredients.IngredientResponse;
 
+import java.util.stream.Collectors;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -22,6 +24,50 @@ public class ExplorePresenter {
     }
 
 
+    @SuppressLint("CheckResult")
+    public void searchInIngredients(String query) {
+        repo.getIngredients()
+                .subscribeOn(Schedulers.io())
+                .map(IngredientResponse::getIngredients)
+                .map(ingredients -> ingredients.stream()
+                        .filter(ingredient -> ingredient.getIngredient().toLowerCase().contains(query.toLowerCase()))
+                        .collect(Collectors.toList()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        list -> view.showIngredients(list),
+                        error -> view.showError(error.getMessage())
+                );
+    }
+
+    @SuppressLint("CheckResult")
+    public void searchInCountries(String query) {
+        repo.getCountries()
+                .subscribeOn(Schedulers.io())
+                .map(CountryResponse::getCountries)
+                .map(countries -> countries.stream()
+                        .filter(category -> category.getCountry().toLowerCase().contains(query.toLowerCase()))
+                        .collect(Collectors.toList()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        list -> view.showCountries(list),
+                        error -> view.showError(error.getMessage())
+                );
+    }
+
+    @SuppressLint("CheckResult")
+    public void searchInCategories(String query) {
+        repo.getCategories()
+                .subscribeOn(Schedulers.io())
+                .map(CategoryResponse::getCategories)
+                .map(categories -> categories.stream()
+                        .filter(category -> category.getTitle().toLowerCase().contains(query.toLowerCase()))
+                        .collect(Collectors.toList()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        list -> view.showCategories(list),
+                        error -> view.showError(error.getMessage())
+                );
+    }
 
     @SuppressLint("CheckResult")
     public void getCategories() {

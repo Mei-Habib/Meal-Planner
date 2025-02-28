@@ -6,6 +6,11 @@ import com.example.mealplanner.fragments.explore.view.ExploreAdapter;
 import com.example.mealplanner.fragments.recipes.view.RecipesView;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.model.ingredients.Ingredient;
+import com.example.mealplanner.model.ingredients.IngredientResponse;
+import com.example.mealplanner.model.recipes.RecipeResponse;
+
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -14,34 +19,36 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class RecipesPresenter {
     private RecipesRepository repo;
     private RecipesView view;
+    private final String CATEGORIES = "Categories";
+    private final String COUNTRIES = "Countries";
+    private final String INGREDIENTS = "Ingredients";
 
     public RecipesPresenter(RecipesRepository repo, RecipesView view) {
         this.repo = repo;
         this.view = view;
     }
 
-//    public void search(String query) {
-//        Observable<Ingredient> observable = Observable.fromIterable(ingredientsList);
-//        observable
-//                .filter(item -> item.getStrIngredient().toLowerCase().contains(query.toLowerCase()))
-//                .toList()
-//                .subscribe(ingredientDTOS -> view.filterData(ingredientDTOS));
-//    }
-
     @SuppressLint("CheckResult")
-    public void getRecipes(String title, int searchBy) {
+    public void getRecipes(String query, String key, int searchBy) {
         if (searchBy == ExploreAdapter.CATEGORY_LAYOUT) {
-            repo.searchRecipesByCategory(title).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                    list -> view.showRecipes(list.getRecipes()),
-                    error -> view.showError(error.getMessage())
-            );
+            repo.searchRecipesByCategory(key)
+                    .subscribeOn(Schedulers.io())
+                    .map(RecipeResponse::getRecipes)
+                    .map(recipes -> recipes.stream()
+                            .filter(recipe -> recipe.getTitle().toLowerCase().contains(query.toLowerCase()))
+                            .collect(Collectors.toList()))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            list -> view.showRecipes(list),
+                            error -> view.showError(error.getMessage())
+                    );
         } else if (searchBy == ExploreAdapter.COUNTRY_LAYOUT) {
-            repo.searchRecipesByCountry(title).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+            repo.searchRecipesByCountry(key).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                     list -> view.showRecipes(list.getRecipes()),
                     error -> view.showError(error.getMessage()));
 
         } else if (searchBy == ExploreAdapter.INGREDIENT_LAYOUT) {
-            repo.searchRecipesByIngredient(title).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+            repo.searchRecipesByIngredient(key).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                     list -> view.showRecipes(list.getRecipes()),
                     error -> view.showError(error.getMessage()));
         }

@@ -74,7 +74,10 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
         } else if (layout == COUNTRY_LAYOUT) {
             Country country = (Country) list.get(position);
             holder.title.setText(country.getCountry());
-            holder.thumbnail.setImageResource(country.getThumbnail().get(position));
+            Glide.with(context).load(FlagMapper.getFlag(country.getCountry()))
+                    .apply(new RequestOptions().override(200, 200))
+                    .placeholder(R.drawable.placeholder)
+                    .into(holder.thumbnail);
             holder.thumbnail.setOnClickListener(v -> listener.onItemClick(country.getCountry(), COUNTRY_LAYOUT));
 
         } else if (layout == INGREDIENT_LAYOUT) {
@@ -97,7 +100,6 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
     }
 
     public void updateList(int layout, List<?> list) {
-        Log.i("TAG", "updateList: " + list.get(0));
         this.list = list;
         this.layout = layout;
         notifyDataSetChanged();
@@ -126,7 +128,7 @@ public class ExploreAdapter extends RecyclerView.Adapter<ExploreAdapter.ViewHold
     }
 
     public interface OnItemClickListener {
-        void onItemClick(String title, int searchBy);
+        void onItemClick(String key, int searchBy);
     }
 }
 

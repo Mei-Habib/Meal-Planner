@@ -47,4 +47,5 @@
     <string name="log_out">Log out</string>
     <string name="including">Including:</string>
     <string name="search_by">Search by</string>
+    <string name="search_by_recipe">Search by Recipe</string>
 </resources>

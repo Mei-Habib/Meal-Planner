@@ -30,7 +30,6 @@
                 android:background="@color/white"
                 android:baselineAligned="false"
                 android:queryBackground="@color/white"
-                android:queryHint="Search"
                 android:textSize="8sp" />
         </com.google.android.material.card.MaterialCardView>
 
