@@ -1,4 +1,4 @@
-package com.example.mealplanner;
+package com.example.mealplanner.helpers;
 
 import android.app.Activity;
 import android.content.res.ColorStateList;

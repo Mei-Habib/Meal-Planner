@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mealplanner.R;
-import com.example.mealplanner.SnackBar;
+import com.example.mealplanner.helpers.SnackBar;
 import com.example.mealplanner.auth.AuthRepository;
 import com.example.mealplanner.fragments.start.presenter.StartPresenter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;

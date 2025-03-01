@@ -15,9 +15,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class RecipesPresenter {
     private RecipesRepository repo;
     private RecipesView view;
-    private final String CATEGORIES = "Categories";
-    private final String COUNTRIES = "Countries";
-    private final String INGREDIENTS = "Ingredients";
 
     public RecipesPresenter(RecipesRepository repo, RecipesView view) {
         this.repo = repo;
@@ -61,5 +58,9 @@ public class RecipesPresenter {
                             list -> view.showRecipes(list),
                             error -> view.showError(error.getMessage()));
         }
+    }
+
+    public void searchRecipeByName(String name){
+        repo.searchRecipeByName(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe();
     }
 }

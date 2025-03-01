@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mealplanner.helpers.NetworkMonitor;
 import com.example.mealplanner.R;
 import com.example.mealplanner.fragments.explore.presenter.ExplorePresenter;
 import com.example.mealplanner.model.RecipesRepository;
@@ -20,6 +21,7 @@ import com.example.mealplanner.model.categories.Category;
 import com.example.mealplanner.model.countries.Country;
 import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.ingredients.Ingredient;
+import com.example.mealplanner.network.FirestoreDataSource;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -47,6 +49,7 @@ public class ExploreFragment extends Fragment implements ExploreView, ExploreAda
     private boolean isCountryChecked = false;
     private boolean isIngredientChecked = false;
     private Disposable searchDisposable;
+    private NetworkMonitor networkMonitor;
 
     @Nullable
     @Override
@@ -62,7 +65,7 @@ public class ExploreFragment extends Fragment implements ExploreView, ExploreAda
         recyclerView = view.findViewById(R.id.recyclerView_explore);
         adapter = new ExploreAdapter(getContext(), this, 0, new ArrayList<>(0));
         recyclerView.setAdapter(adapter);
-        repository = RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(getContext()));
+        repository = RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(getContext()), new FirestoreDataSource());
         presenter = new ExplorePresenter(repository, this);
 
         for (int i = 0; i < chipGroup.getChildCount(); i++) {
@@ -118,6 +121,21 @@ public class ExploreFragment extends Fragment implements ExploreView, ExploreAda
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (networkMonitor == null) {
+            networkMonitor = new NetworkMonitor(requireActivity());
+        }
+        networkMonitor.registerNetworkCallback();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        networkMonitor.unregisterNetworkCallback();
     }
 
     @Override

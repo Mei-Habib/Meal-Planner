@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 
 public class RecipesLocalDataSource {
     private final RecipeDAO dao;
@@ -30,15 +31,23 @@ public class RecipesLocalDataSource {
         return dao.deleteRecipe(recipe);
     }
 
+    public Single<Boolean> isRecipeExistInFavorite(String recipeId) {
+        return dao.isRecipeExistInFavorite(recipeId);
+    }
+
+    public Single<Boolean> isRecipeExistInPlan(String title){
+        return  dao.isRecipeExistInPlan(title);
+    }
+
     public Completable insertPlan(Plan plan) {
         return dao.insertPlan(plan);
     }
 
-    public Completable deletePlan(Plan plan){
+    public Completable deletePlan(Plan plan) {
         return dao.deletePlan(plan);
     }
 
-    public Observable<List<Plan>> getPlans(String date){
+    public Observable<List<Plan>> getPlans(String date) {
         return dao.getPlans(date);
     }
 

@@ -1,13 +1,11 @@
 package com.example.mealplanner.fragments.login.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,16 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mealplanner.R;
-import com.example.mealplanner.SnackBar;
+import com.example.mealplanner.helpers.SnackBar;
 import com.example.mealplanner.auth.AuthRepository;
 import com.example.mealplanner.fragments.login.presenter.LoginPresenter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends Fragment implements LoginView {
     private TextInputEditText emailEditText;

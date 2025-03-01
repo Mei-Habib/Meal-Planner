@@ -19,6 +19,7 @@ import com.example.mealplanner.fragments.recipes.presenter.RecipesPresenter;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
+import com.example.mealplanner.network.FirestoreDataSource;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class RecipesFragment extends Fragment implements RecipesView {
+public class RecipesFragment extends Fragment implements RecipesView, RecipesAdapter.OnRecipeClickListener {
 
     private static final String TAG = "RecipesFragment";
     private SearchView searchView;
@@ -50,9 +51,9 @@ public class RecipesFragment extends Fragment implements RecipesView {
         super.onViewCreated(view, savedInstanceState);
         searchView = view.findViewById(R.id.searchViewRecipe);
         recyclerView = view.findViewById(R.id.recyclerViewRecipes);
-        adapter = new RecipesAdapter(requireContext(), new ArrayList<>());
+        adapter = new RecipesAdapter(requireContext(), this, new ArrayList<>());
         recyclerView.setAdapter(adapter);
-        presenter = new RecipesPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(requireContext())), this);
+        presenter = new RecipesPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(requireContext()), new FirestoreDataSource()), this);
         String key = RecipesFragmentArgs.fromBundle(getArguments()).getKey();
         int searchBy = RecipesFragmentArgs.fromBundle(getArguments()).getSearchBy();
         presenter.getRecipes("", key, searchBy);
@@ -104,5 +105,12 @@ public class RecipesFragment extends Fragment implements RecipesView {
     @Override
     public void showError(String message) {
         Log.e(TAG, "showError: " + message);
+    }
+
+    @Override
+    public void onRecipeClick(Recipe recipe) {
+        RecipesFragmentDirections.ActionRecipesFragmentToRecipeDetailsFragment action =
+                RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(recipe);
+        Navigation.findNavController(requireView()).navigate(action);
     }
 }

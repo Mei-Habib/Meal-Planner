@@ -22,6 +22,7 @@ import com.example.mealplanner.model.Plan;
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
+import com.example.mealplanner.network.FirestoreDataSource;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -56,7 +57,7 @@ public class PlannerFragment extends Fragment implements PlannerView, PlannerAda
         guestView = view.findViewById(R.id.guestView);
         userView = view.findViewById(R.id.userView);
         signUp = view.findViewById(R.id.signUp);
-        presenter = new PlannerPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(requireContext())), this);
+        presenter = new PlannerPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(requireContext()), new FirestoreDataSource()), this);
         adapter = new PlannerAdapter(requireContext(), this, new ArrayList<>());
         recyclerView.setAdapter(adapter);
 

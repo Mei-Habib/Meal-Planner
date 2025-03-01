@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.mealplanner.R;
-import com.example.mealplanner.SnackBar;
+import com.example.mealplanner.helpers.SnackBar;
 import com.example.mealplanner.auth.AuthRepository;
 import com.example.mealplanner.fragments.register.presenter.RegisterPresenter;
 import com.google.android.material.button.MaterialButton;

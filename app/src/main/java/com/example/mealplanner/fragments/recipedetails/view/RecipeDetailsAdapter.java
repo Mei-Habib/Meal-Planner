@@ -17,6 +17,7 @@ import com.example.mealplanner.fragments.recipedetails.presenter.RecipeDetailsPr
 import com.example.mealplanner.model.RecipesRepository;
 import com.example.mealplanner.data.local.room.database.RecipesLocalDataSource;
 import com.example.mealplanner.model.recipes.Recipe;
+import com.example.mealplanner.network.FirestoreDataSource;
 import com.example.mealplanner.network.RecipeRemoteDataSource;
 
 
@@ -34,7 +35,7 @@ public class RecipeDetailsAdapter extends RecyclerView.Adapter<RecipeDetailsAdap
         this.view = view;
         this.recipe = recipe;
         this.count = count;
-        presenter = new RecipeDetailsPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(context)), view);
+        presenter = new RecipeDetailsPresenter(context, RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(context), new FirestoreDataSource()), view);
     }
 
     @NonNull

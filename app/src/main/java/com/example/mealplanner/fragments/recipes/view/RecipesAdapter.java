@@ -2,6 +2,7 @@ package com.example.mealplanner.fragments.recipes.view;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
+import com.example.mealplanner.fragments.recipes.presenter.RecipesPresenter;
 import com.example.mealplanner.model.recipes.Recipe;
 import com.google.android.material.card.MaterialCardView;
 
@@ -24,10 +26,12 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     private Context context;
     private List<Recipe> recipes;
+    private OnRecipeClickListener listener;
 
-    public RecipesAdapter(Context context, List<Recipe> recipes) {
+    public RecipesAdapter(Context context, OnRecipeClickListener listener, List<Recipe> recipes) {
         this.context = context;
         this.recipes = recipes;
+        this.listener = listener;
     }
 
     @NonNull
@@ -46,9 +50,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                 .placeholder(R.drawable.placeholder)
                 .into(holder.thumbnail);
 
-//        holder.cardView.setOnClickListener(view -> listener.onPlanClickListener(plans.get(position)));
+        Log.i("TAG", "RecipesAdapter: " + recipes.get(position));
 
-//        holder.delete.setOnClickListener(view -> listener.onDeleteClickListener(plans.get(position)));
+        holder.cardView.setOnClickListener(view -> listener.onRecipeClick(recipes.get(position)));
+
     }
 
     @Override
@@ -75,9 +80,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         }
     }
 
-//    public interface OnPlanClickListener {
-//        void onPlanClickListener(Plan plan);
-//
-//        void onDeleteClickListener(Plan plan);
-//    }
+    public interface OnRecipeClickListener {
+        void onRecipeClick(Recipe recipe);
+    }
 }

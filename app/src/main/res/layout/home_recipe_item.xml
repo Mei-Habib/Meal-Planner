@@ -93,16 +93,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_recipe_title"
                 tools:text="Dinner" />
 
-            <ImageView
-                android:id="@+id/imv_add_favorite"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginRight="18dp"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/add_favorite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

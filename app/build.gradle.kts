@@ -57,6 +57,7 @@ dependencies {
 //    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
 //    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
     implementation(libs.firebase.firestore)
+    implementation("com.google.firebase:firebase-firestore:25.1.2")
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.google.code.gson:gson:2.12.1")
