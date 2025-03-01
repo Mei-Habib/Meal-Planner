@@ -5,16 +5,11 @@ import android.annotation.SuppressLint;
 import com.example.mealplanner.fragments.explore.view.ExploreAdapter;
 import com.example.mealplanner.fragments.recipes.view.RecipesView;
 import com.example.mealplanner.model.RecipesRepository;
-import com.example.mealplanner.model.countries.CountryResponse;
-import com.example.mealplanner.model.ingredients.Ingredient;
-import com.example.mealplanner.model.ingredients.IngredientResponse;
 import com.example.mealplanner.model.recipes.RecipeResponse;
 
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RecipesPresenter {

@@ -116,7 +116,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="35 mins"
+                android:text="---"
                 android:textColor="@color/green"
                 android:textSize="16sp" />
 
@@ -264,6 +264,12 @@
             android:layout_marginTop="36dp"
             app:autoPlay="false"
             app:layout_constraintTop_toBottomOf="@id/tv_instructions" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/guestView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="button_add_favorite,button_calendar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

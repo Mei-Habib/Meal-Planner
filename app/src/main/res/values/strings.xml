@@ -48,4 +48,8 @@
     <string name="including">Including:</string>
     <string name="search_by">Search by</string>
     <string name="search_by_recipe">Search by Recipe</string>
+    <string name="register_for_more_features">Register for more features</string>
+    <string name="sign_up_for_more_features">Sign Up for More Features</string>
+    <string name="add_your_food_preferences_plan_your_meals_and_more">Add your food preferences, plan your meals and more!</string>
+    <string name="save_your_first_recipe">Save Your First Recipe!</string>
 </resources>

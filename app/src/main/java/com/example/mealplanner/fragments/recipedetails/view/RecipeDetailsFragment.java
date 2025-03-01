@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mealplanner.R;
+import com.example.mealplanner.data.local.sharedpreferences.SharedPreferenceDataSource;
 import com.example.mealplanner.fragments.recipedetails.presenter.RecipeDetailsPresenter;
 import com.example.mealplanner.model.Plan;
 import com.example.mealplanner.model.RecipesRepository;
@@ -45,7 +47,6 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
     private TextView title;
     ImageButton bookmark;
     ImageButton datePicker;
-    private TextView cookingTime;
     private TextView cuisine;
     private TextView instructions;
     private YouTubePlayerView youTubePlayerView;
@@ -53,6 +54,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
     private ImageButton plus;
     private ImageButton minus;
     private ImageButton back;
+    private Group guestView;
     private Recipe recipe;
     private RecyclerView recyclerView;
     private RecipeDetailsAdapter adapter;
@@ -72,7 +74,6 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
         recyclerView = view.findViewById(R.id.recyclerView_recipeIngredients);
         thumbnail = view.findViewById(R.id.imv_recipe);
         title = view.findViewById(R.id.tv_recipeTitle);
-        cookingTime = view.findViewById(R.id.tv_cookingTime);
         cuisine = view.findViewById(R.id.tv_cuisine);
         instructions = view.findViewById(R.id.tv_instructions);
         youTubePlayerView = view.findViewById(R.id.recipeVideoView);
@@ -82,6 +83,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
         bookmark = view.findViewById(R.id.button_add_favorite);
         datePicker = view.findViewById(R.id.button_calendar);
         back = view.findViewById(R.id.button_back);
+        guestView = view.findViewById(R.id.guestView);
         BottomNavigationView bottomNav = requireActivity().findViewById(R.id.bottom_nav);
 
 
@@ -102,6 +104,9 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsView
     }
 
     private void initializeViews() {
+        if (SharedPreferenceDataSource.getInstance(requireContext()).getUser() == null) {
+            guestView.setVisibility(View.GONE);
+        }
         recipe = RecipeDetailsFragmentArgs.fromBundle(getArguments()).getRecipe();
         title.setText(recipe.getTitle());
         cuisine.setText(recipe.getCuisine());

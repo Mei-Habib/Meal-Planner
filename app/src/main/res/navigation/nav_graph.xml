@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_favoriteFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_startFragment"
+            app:destination="@id/startFragment" />
     </fragment>
     <fragment
         android:id="@+id/plannerFragment"
@@ -37,11 +40,18 @@
         <action
             android:id="@+id/action_plannerFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
+        <action
+            android:id="@+id/action_plannerFragment_to_startFragment"
+            app:destination="@id/startFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.mealplanner.fragments.profile.view.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
         android:name="com.example.mealplanner.fragments.categories.view.CategoriesFragment"

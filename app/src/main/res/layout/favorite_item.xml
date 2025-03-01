@@ -34,9 +34,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
             android:layout_marginTop="58dp"
-            android:layout_marginLeft="12dp"
+            android:padding="12dp"
             android:fontFamily="@font/poppins_bold"
-            android:maxLines="1"
+            android:maxLines="2"
             tools:text="Chicken Ranch Wrap"
             android:textColor="@color/black"
             android:textSize="14sp" />

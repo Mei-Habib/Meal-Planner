@@ -29,4 +29,8 @@ public class RecipeDetailsPresenter {
     public void insertPlan(Plan plan) {
         repo.insertPlan(plan).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe();
     }
+
+    public void searchIfRecipeInFavorite(Recipe recipe){
+
+    }
 }

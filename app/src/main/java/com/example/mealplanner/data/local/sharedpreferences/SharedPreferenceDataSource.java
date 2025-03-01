@@ -36,4 +36,8 @@ public class SharedPreferenceDataSource {
         Gson gson = new Gson();
         return userJson != null ? gson.fromJson(userJson, User.class) : null;
     }
+
+    public void clearUser() {
+        sharedPreferences.edit().remove(USER).apply();
+    }
 }

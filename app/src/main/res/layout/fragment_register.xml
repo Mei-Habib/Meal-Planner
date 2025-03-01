@@ -85,7 +85,6 @@
         android:layout_marginHorizontal="16dp"
         app:boxStrokeErrorColor="@color/red"
         app:cursorColor="@color/green"
-        app:errorIconDrawable="@drawable/error"
         app:helperTextTextColor="@color/light_grey"
         app:hintTextColor="@color/green"
         app:layout_constraintTop_toBottomOf="@id/outlinedTextField_name">
@@ -109,8 +108,6 @@
         app:boxStrokeColor="@color/green"
         app:boxStrokeErrorColor="@color/red"
         app:cursorColor="@color/green"
-        app:endIconDrawable="@drawable/hidden_ic"
-        app:errorIconDrawable="@drawable/error"
         app:helperTextTextColor="@color/light_grey"
         app:hintTextColor="@color/green"
         app:layout_constraintTop_toBottomOf="@id/outlinedTextField_email">

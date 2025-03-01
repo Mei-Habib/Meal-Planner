@@ -5,14 +5,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealplanner.R;
+import com.example.mealplanner.data.local.sharedpreferences.SharedPreferenceDataSource;
 import com.example.mealplanner.fragments.planner.presenter.PlannerPresenter;
 import com.example.mealplanner.model.Plan;
 import com.example.mealplanner.model.RecipesRepository;
@@ -34,6 +38,9 @@ public class PlannerFragment extends Fragment implements PlannerView, PlannerAda
     private RecyclerView recyclerView;
     private PlannerAdapter adapter;
     private PlannerPresenter presenter;
+    private ConstraintLayout guestView;
+    private Group userView;
+    private TextView signUp;
 
     @Nullable
     @Override
@@ -46,24 +53,30 @@ public class PlannerFragment extends Fragment implements PlannerView, PlannerAda
         super.onViewCreated(view, savedInstanceState);
         calendarView = view.findViewById(R.id.calendarView);
         recyclerView = view.findViewById(R.id.plansRecyclerView);
+        guestView = view.findViewById(R.id.guestView);
+        userView = view.findViewById(R.id.userView);
+        signUp = view.findViewById(R.id.signUp);
         presenter = new PlannerPresenter(RecipesRepository.getInstance(new RecipeRemoteDataSource(), new RecipesLocalDataSource(requireContext())), this);
         adapter = new PlannerAdapter(requireContext(), this, new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
-//        calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
-//            String selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, dayOfMonth);
-//            Log.i(TAG, "onDateChangeListener: " + selectedDate);
-//            presenter.getPlans(selectedDate);
-//        });
+        if (SharedPreferenceDataSource.getInstance(requireContext()).getUser() == null) {
+            guestView.setVisibility(View.VISIBLE);
+        } else {
+            userView.setVisibility(View.VISIBLE);
+        }
 
-        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                String selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", date.getYear(), date.getMonth() + 1, date.getDay());
-                Log.i(TAG, "onDateChangeListener: " + selectedDate);
-                presenter.getPlans(selectedDate);
-            }
+        onClick();
+
+    }
+
+    private void onClick() {
+        calendarView.setOnDateChangedListener((widget, date, selected) -> {
+            String selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", date.getYear(), date.getMonth() + 1, date.getDay());
+            presenter.getPlans(selectedDate);
         });
+
+        signUp.setOnClickListener(v -> Navigation.findNavController(requireView()).navigate(R.id.action_plannerFragment_to_startFragment));
     }
 
     @Override
